@@ -24,7 +24,7 @@ public class VerifyPreorderSerializationOfABinaryTree {
 
     public static boolean isValidSerialization(String preorder) {
         String[] nodes = preorder.split(",");
-        //validate this binary tree follow key point 1 or not
+        //check key point 1, node + 1 = null
         int nullCount = 0;
         int nodeCounts = 0;
         for (String s : nodes) {
@@ -35,6 +35,7 @@ public class VerifyPreorderSerializationOfABinaryTree {
             }
         }
 
+        //check key point 2, null count is legal or not
         boolean reasonableNull = true;
         int nullAvailable = 0;
         for (int i = 0; i < nodes.length; i++) {
@@ -48,6 +49,8 @@ public class VerifyPreorderSerializationOfABinaryTree {
             } else {
                 nullAvailable += 1;
             }
+            //check if nullAvailable == -1, it should be last leaves and no more nodes
+            //otherwise, it is invalidated
             if (nullAvailable == -1 && i != nodes.length - 1) {
                 reasonableNull = false;
                 break;
