@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /**
  * lee code question address
  * https://leetcode.com/problems/largest-rectangle-in-histogram/#/description
@@ -5,7 +7,7 @@
 
 public class LargestRectangleInHistogram {
     public static void main(String[] args) {
-        int[] c1 = {2, 1, 5, 6, 2, 3};
+        int[] c1 = {2, 1, 5, 6, 4, 3};
         int[] c2 = {2, 0, 2};
         int[] c3 = {0, 9};
         int[] c4 = {2, 1, 2};
@@ -14,9 +16,10 @@ public class LargestRectangleInHistogram {
         int[] c7 = {2, 1, 4, 5, 1, 3, 3};
         int[] c8 = {1, 2, 3, 4, 5, 6, 7};
         int[] c9 = {3, 6, 5, 7, 4, 8, 1, 0};
-        int[][] cc = {c1, c2, c3, c4, c5, c6, c7, c8, c9};
+        int[] c10 = {10, 9, 8, 7, 6, 5, 4, 3};
+        int[][] cc = {c1, c2, c3, c4, c5, c6, c7, c8, c9, c10};
         for (int i = 0; i < cc.length; i++) {
-            int r = largestRectangleArea(cc[i]);
+            int r = largestRectangleArea2(cc[i]);
             System.out.println("case:" + (i + 1) + ", result: " + r);
         }
     }
@@ -69,5 +72,24 @@ public class LargestRectangleInHistogram {
             }
         }
         return max;
+    }
+
+    //better solution
+    public static int largestRectangleArea2(int[] height) {
+        if (height == null || height.length == 0) return 0;
+        int len = height.length;
+        Stack<Integer> s = new Stack<Integer>();
+        int maxArea = 0;
+        for (int i = 0; i <= len; i++) {
+            int h = (i == len ? 0 : height[i]);
+            if (s.isEmpty() || h >= height[s.peek()]) {
+                s.push(i);
+            } else {
+                int tp = s.pop();
+                maxArea = Math.max(maxArea, height[tp] * (s.isEmpty() ? i : i - 1 - s.peek()));
+                i--;
+            }
+        }
+        return maxArea;
     }
 }
