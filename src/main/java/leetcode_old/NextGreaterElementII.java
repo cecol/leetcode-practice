@@ -1,6 +1,5 @@
 package leetcode_old;
 
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 public class NextGreaterElementII {
     public static void main(String[] s) {
