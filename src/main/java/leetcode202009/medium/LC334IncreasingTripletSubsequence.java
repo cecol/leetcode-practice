@@ -1,4 +1,4 @@
-package leetcode202009;
+package leetcode202009.medium;
 
 /**
  * https://leetcode.com/problems/increasing-triplet-subsequence/
