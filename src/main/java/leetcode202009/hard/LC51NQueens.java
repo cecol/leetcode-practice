@@ -56,8 +56,17 @@ public class LC51NQueens extends BasicTemplate {
         return true;
     }
 
+    /**
+     * best solution: https://leetcode.com/problems/n-queens-ii/discuss/413249
+     * Check out the comments. Be careful about the following aspects:
+     *  1. Why will we stop? In other words, what is the base case?
+     *  2. How do we make string generation more efficiently? StringBuilder
+     *  3. Why should we initialize attack array with int type rather than boolean?
+     * */
     public List<List<String>> solveNQueens2(int n) {
         List<List<String>> r = new ArrayList<>();
+        // integer[][] is proper for indicating that cell has been attack for multiple queens
+        // otherwise boolean[][] cannot
         int[][] attack = new int[n][n];
         putQByAttack(0, n, r, new ArrayList<>(), attack);
         return r;
