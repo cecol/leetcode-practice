@@ -11,22 +11,23 @@ public class LC62UniquePaths extends BasicTemplate {
 
     public static void main(String[] args) {
         var LC = new LC62UniquePaths();
-        var r = LC.uniquePaths(51, 9);
+        var r = LC.uniquePaths(3, 2);
         System.out.println(r);
     }
 
     public int uniquePaths(int m, int n) {
-        int[] t = new int[]{0};
-        pathPerm(m - 1, n - 1, t, 0);
-        return t[0];
+        if (m == 1 && n == 1) return 1;
+        if (m == 1 || n == 1) return 1;
+        int[][] t = new int[m][n];
+        for (int i = 0; i < t.length; i++) t[i][0] = 1;
+        Arrays.fill(t[0], 1);
+        for (int i = 1; i < t.length; i++) {
+            for (int j = 1; j < t[i].length; j++) {
+                t[i][j] = t[i - 1][j] + t[i][j - 1];
+            }
+        }
+        return t[m - 1][n - 1];
     }
 
-    public void pathPerm(int m, int n, int[] t, int d) {
-        if (m == 0 && n == 0) {
-            t[0]++;
-        } else {
-            if (m > 0) pathPerm(m - 1, n, t, d + 1);
-            if (n > 0) pathPerm(m, n - 1, t, d + 1);
-        }
-    }
+
 }
