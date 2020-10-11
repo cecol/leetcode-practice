@@ -28,6 +28,11 @@ public class LC300LongestIncreasingSubsequence extends BasicTemplate {
         return m;
     }
 
+    /**
+     * O(NlogN) solution
+     * https://www.itread01.com/content/1550205367.html
+     * Using TreeMap for binary insert next possible LIS element
+     */
     public int lengthOfLISNlogN(int[] nums) {
         if (nums.length == 0) return 0;
         TreeMap<Integer, Integer> all = new TreeMap<>();

@@ -12,7 +12,7 @@ public class LC51NQueens extends BasicTemplate {
 
     public static void main(String[] args) {
         var LC = new LC51NQueens();
-        var r = LC.solveNQueens2(4);
+        var r = LC.solveNQueensReview(4);
         for (List<String> s : r) {
             System.out.println(String.join("\n", s));
             System.out.println("----------------------------");
@@ -124,4 +124,50 @@ public class LC51NQueens extends BasicTemplate {
             if (newQi + offset < n) attack[k][newQi + offset] -= 1; // right
         }
     }
+
+    public List<List<String>> solveNQueensReview(int n) {
+        List<List<String>> r = new ArrayList<>();
+        int[][] attack = new int[n][n];
+        putQ(r, attack, n, new ArrayList<>());
+        return r;
+    }
+
+    public void putQ(List<List<String>> r, int[][] attack, int n, List<Integer> q) {
+        if(q.size() == n) {
+            List<String> nq = new ArrayList<>();
+            for(int i = 0; i < n; i++) {
+                char[] qq = new char[n];
+                Arrays.fill(qq, '.');
+                qq[q.get(i)] = 'Q';
+                nq.add(String.valueOf(qq));
+            }
+            for(int[] j: attack) log.debug("{}", j);
+            log.debug("--------");
+            r.add(nq);
+        } else {
+            int row = q.size();
+            for(int i = 0; i < n; i++) {
+                if(attack[row][i] == 0) {
+                    q.add(i);
+                    addAttack(attack, row, i, n);
+                    putQ(r, attack, n, q);
+                    q.remove(q.size() -1);
+                    rollbackAttack(attack, row, i, n);
+                }
+            }
+        }
+    }
+
+    public void addAttack(int[][] attack, int r, int q, int n) {
+        for(int i = r + 1; i < n; i++) attack[i][q]++;
+        for(int i = r + 1, j = q+1; i < n && j < n; i++, j++) attack[i][j]++;
+        for(int i = r + 1, j = q-1; i < n && j >= 0; i++, j--) attack[i][j]++;
+    }
+
+    public void rollbackAttack(int[][] attack, int r, int q, int n) {
+        for(int i = r + 1; i < n; i++) attack[i][q]--;
+        for(int i = r + 1, j = q+1; i < n && j < n; i++, j++) attack[i][j]--;
+        for(int i = r + 1, j = q-1; i < n && j >= 0; i++, j--) attack[i][j]--;
+    }
+
 }
