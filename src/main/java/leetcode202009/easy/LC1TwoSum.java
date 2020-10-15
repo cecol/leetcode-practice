@@ -3,7 +3,6 @@ package leetcode202009.easy;
 
 import leetcode202009.BasicTemplate;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
