@@ -6,7 +6,7 @@ import leetcode202009.BasicTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LC1TwoSum4 extends BasicTemplate {
+public class LC653TwoSum4 extends BasicTemplate {
     public class TreeNode {
         int val;
         TreeNode left;
@@ -27,7 +27,7 @@ public class LC1TwoSum4 extends BasicTemplate {
     }
 
     public static void main(String[] args) {
-        var LC = new LC1TwoSum4();
+        var LC = new LC653TwoSum4();
         var s = LC.findTarget(null, 10);
     }
 

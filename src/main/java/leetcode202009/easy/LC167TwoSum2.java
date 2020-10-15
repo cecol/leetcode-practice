@@ -3,12 +3,9 @@ package leetcode202009.easy;
 
 import leetcode202009.BasicTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class LC1TwoSum2 extends BasicTemplate {
+public class LC167TwoSum2 extends BasicTemplate {
     public static void main(String[] args) {
-        var LC = new LC1TwoSum2();
+        var LC = new LC167TwoSum2();
         var s = LC.twoSum(new int[]{2, 5, 5, 11}, 10);
     }
 
