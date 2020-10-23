@@ -2,11 +2,6 @@ package leetcode202009.medium;
 
 import leetcode202009.BasicTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class LC322CoinChange extends BasicTemplate {
 
     public static void main(String[] args) {
