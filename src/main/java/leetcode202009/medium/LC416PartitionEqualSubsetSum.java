@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LC416PartitionEqualSubsetSum extends BasicTemplate {
 
@@ -33,6 +34,24 @@ public class LC416PartitionEqualSubsetSum extends BasicTemplate {
             }
         }
         return dp[dp.length - 1][dp[0].length - 1];
+    }
+
+    /**
+     * https://leetcode.com/problems/partition-equal-subset-sum/discuss/671810/Java-with-picture
+     */
+    public boolean canPartition2(int[] nums) {
+        int s = IntStream.of(nums).sum();
+        int h = s >> 1;
+        if (s % 2 != 0) return false;
+
+        boolean dp[] = new boolean[h + 1];
+        dp[0] = true;
+        for (int n : nums)
+            for (int i = h; i >= n; i--) {
+                dp[i] |= dp[i-n];
+                if(dp[i] && i == h) return true;
+            }
+        return false;
     }
 
 }
