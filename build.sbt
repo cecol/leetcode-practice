@@ -1,4 +1,4 @@
-name := "lee-code-practice"
+name := "leecode-practice"
 
 version := "1.0"
 
