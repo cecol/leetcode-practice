@@ -1,4 +1,4 @@
-package leetcode20200921to20201031.medium.subclass;
+package leetcode20200921to20201031.medium.algo;
 
 import leetcode20200921to20201031.BasicTemplate;
 
