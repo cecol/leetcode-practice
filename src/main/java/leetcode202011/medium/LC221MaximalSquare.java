@@ -53,6 +53,7 @@ public class LC221MaximalSquare extends BasicTemplate {
 
   /**
    * https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-221-maximal-square/
+   * https://blog.csdn.net/fuxuemingzhu/article/details/82992233
    * O(N^2)
    */
   public int maximalSquare2(char[][] matrix) {
