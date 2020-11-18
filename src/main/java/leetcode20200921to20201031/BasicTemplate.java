@@ -9,4 +9,8 @@ public abstract class BasicTemplate {
   protected void logIntArray(int[][] d) {
     for (int[] i : d) log.debug("{}", i);
   }
+
+  protected void logLongArray(long[][] d) {
+    for (long[] i : d) log.debug("{}", i);
+  }
 }

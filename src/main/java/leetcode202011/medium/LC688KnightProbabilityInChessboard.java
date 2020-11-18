@@ -6,45 +6,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LC688KnightProbabilityInChessboard extends BasicTemplate {
-  public static void main(String[] args) {
-    var LC = new LC688KnightProbabilityInChessboard();
-    var s2 = LC.knightProbability(3, 2, 0, 0);
-    var s = LC.knightProbability(8, 30, 6, 4);
-  }
-
-  public double knightProbability(int N, int K, int r, int c) {
-    int[][] dp = new int[N][N];
-    int s = 0;
-
-    for (int[] i : dp)
-      for (int j : i)
-        s += j;
-    return s / Math.pow(8, K);
-  }
-
-  /**
-   * out of memory
-   */
-  public double knightProbabilityFail(int N, int K, int r, int c) {
-    List<int[]> steps = new ArrayList<>();
-    steps.add(new int[]{r, c});
-    for (int i = 1; i <= K; i++) {
-      List<int[]> next = new ArrayList<>(steps);
-      steps.clear();
-      for (int[] p : next) {
-        if (p[0] + 1 < N && p[1] + 2 < N) steps.add(new int[]{p[0] + 1, p[1] + 2});
-        if (p[0] + 1 < N && p[1] - 2 >= 0) steps.add(new int[]{p[0] + 1, p[1] - 2});
-        if (p[0] - 1 >= 0 && p[1] + 2 < N) steps.add(new int[]{p[0] - 1, p[1] + 2});
-        if (p[0] - 1 >= 0 && p[1] - 2 >= 0) steps.add(new int[]{p[0] - 1, p[1] - 2});
-        if (p[0] + 2 < N && p[1] + 1 < N) steps.add(new int[]{p[0] + 2, p[1] + 1});
-        if (p[0] + 2 < N && p[1] - 1 >= 0) steps.add(new int[]{p[0] + 2, p[1] - 1});
-        if (p[0] - 2 >= 0 && p[1] + 1 < N) steps.add(new int[]{p[0] - 2, p[1] + 1});
-        if (p[0] - 2 >= 0 && p[1] - 1 >= 0) steps.add(new int[]{p[0] - 2, p[1] - 1});
-      }
+    public static void main(String[] args) {
+        var LC = new LC688KnightProbabilityInChessboard();
+        var s2 = LC.knightProbability(3, 2, 0, 0);
+        var s = LC.knightProbability(8, 30, 6, 4);
     }
-    double p = steps.size() / Math.pow(8, K);
-    log.info("p: {}", p);
-    for (int[] i : steps) log.info("steps: {}", i);
-    return p;
-  }
+
+    /**
+     * https://leetcode.com/problems/knight-probability-in-chessboard/discuss/162722/Simple-Java-DP-solution-with-explanation
+     * int[k][i][j]
+     */
+    public double knightProbability(int N, int K, int r, int c) {
+        int[][] directions = new int[][]{{1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {2, 1}, {2, -1}, {-2, 1}, {-2, -1}};
+        double[][][] dp = new double[K + 1][N][N];
+        dp[0][r][c] = 1d;
+        for (int p = 1; p <= K; p++)
+            for (int i = 0; i < N; i++)
+                for (int j = 0; j < N; j++)
+                    for (int[] dir : directions) {
+                        int m1 = i - dir[0];
+                        int m2 = j - dir[1];
+                        if (m1 >= 0 && m1 < N && m2 >= 0 && m2 < N) {
+                            dp[p][i][j] += (dp[p - 1][m1][m2] / 8d);
+                        }
+                    }
+        double s = 0;
+        for (double[] i : dp[K])
+            for (double j : i)
+                s += j;
+        log.debug("s: {}", s);
+        return s;
+    }
 }
