@@ -18,8 +18,8 @@ public class LC494TargetSum extends BasicTemplate {
         if (S > sum || S < -sum) return 0;
         int size = 2 * sum + 1;
         int[][] dp = new int[nums.length][size];
-        dp[0][sum + nums[0]] = 1;
-        dp[0][sum - nums[0]] = 1;
+        dp[0][sum + nums[0]] += 1;
+        dp[0][sum - nums[0]] += 1;
         for (int i = 1; i < nums.length; i++)
             for (int j = 0; j < dp[0].length; j++) {
                 if (dp[i - 1][j] > 0) {
@@ -27,8 +27,7 @@ public class LC494TargetSum extends BasicTemplate {
                     if (j - nums[i] >= 0) dp[i][j - nums[i]] += dp[i - 1][j];
                 }
             }
-        log.debug("{}", dp[nums.length - 1]);
-        log.debug("{}", dp[nums.length - 1][sum + S]);
-        return dp[nums.length - 1][size / 2 + S];
+        logIntArray(dp);
+        return dp[nums.length - 1][sum + S];
     }
 }
