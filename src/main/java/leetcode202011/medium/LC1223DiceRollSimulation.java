@@ -11,6 +11,10 @@ public class LC1223DiceRollSimulation extends BasicTemplate {
     var s = LC.dieSimulator(1, new int[]{});
   }
 
+  /**
+   *  https://www.acwing.com/solution/LeetCode/content/5270/
+   *  https://www.youtube.com/watch?v=3JOZcD-BRLE&ab_channel=HuaHua
+   */
   public int dieSimulator(int n, int[] rollMax) {
     int mod = ((int) Math.pow(10, 9)) + 7;
     int[][][] dp = new int[n][6][16];
