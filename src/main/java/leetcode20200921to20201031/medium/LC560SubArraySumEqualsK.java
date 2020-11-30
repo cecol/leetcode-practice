@@ -9,7 +9,7 @@ public class LC560SubArraySumEqualsK extends BasicTemplate {
 
     public static void main(String[] args) {
         var LC = new LC560SubArraySumEqualsK();
-        var r = LC.subarraySumOptimized(new int[]{-1, -1, 1}, 0);
+        var r = LC.subarraySumOptimized(new int[]{1, -1, 0}, 0);
     }
 
     public int subarraySum(int[] nums, int k) {
@@ -28,9 +28,9 @@ public class LC560SubArraySumEqualsK extends BasicTemplate {
 
     /**
      * explaination:
-     *  https://leetcode.com/problems/subarray-sum-equals-k/discuss/803317/Java-Solution-with-Detailed-Explanation
-     *  https://leetcode.com/problems/subarray-sum-equals-k/discuss/124151/22ms-Java-Hash-with-Explanations
-     *  https://leetcode.com/problems/subarray-sum-equals-k/discuss/876722/Yet-another-explanation-in-Java
+     * https://leetcode.com/problems/subarray-sum-equals-k/discuss/803317/Java-Solution-with-Detailed-Explanation
+     * https://leetcode.com/problems/subarray-sum-equals-k/discuss/124151/22ms-Java-Hash-with-Explanations
+     * https://leetcode.com/problems/subarray-sum-equals-k/discuss/876722/Yet-another-explanation-in-Java
      */
     public int subarraySumOptimized(int[] nums, int k) {
         int c = 0;
