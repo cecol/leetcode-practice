@@ -11,7 +11,7 @@ public class LC338CountingBits extends BasicTemplate {
   /**
    * https://blog.csdn.net/fuxuemingzhu/article/details/70806676
    * i has tow cases:
-   *  even: i's 1 bits == i/2( ex: (i/2) >> 1 == i )
+   *  even: i's 1 bits == i/2( ex: (i/2) << 1 == i )
    *  odd: i's 1 bits == (i-1)'s bits + 1
    *    (i-1) => even => (i-1)'s bits == (i/2)'s bits
    * */

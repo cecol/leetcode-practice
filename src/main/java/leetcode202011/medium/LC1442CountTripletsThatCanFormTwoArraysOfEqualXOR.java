@@ -12,6 +12,15 @@ public class LC1442CountTripletsThatCanFormTwoArraysOfEqualXOR extends BasicTemp
         LC.countTriplets2(new int[]{2, 3, 1, 6, 7});
     }
 
+    /**
+     * A ^ B == 0 => A == B
+     * look for XOR[i .. k] == 0
+     * XOR[i .. k] == 0
+     *  A[0] ^ A[1] ^ ... ^ A[i-1]
+     *      XOR
+     *  A[0] ^ A[1] ^ ... ^ A[i-1] ^ A[i] ^ A[i+1] ^ ... ^ A[k]
+     *  == 0
+     * */
     public int countTriplets(int[] arr) {
         int c = 0;
         if (arr == null || arr.length < 2) return c;
