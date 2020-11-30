@@ -8,25 +8,26 @@ public class LC647PalindromicSubstrings extends BasicTemplate {
         var s = LC.countSubstrings("abc");
     }
 
+    int count = 1;
+    /**
+     * https://leetcode.com/problems/palindromic-substrings/discuss/105688/Very-Simple-Java-Solution-with-Detail-Explanation
+     * */
     public int countSubstrings(String s) {
         if (s == null || s.length() == 0) return 0;
         if (s.length() == 1) return 1;
-        int n = s.length();
-        int[][] dp = new int[n][n];
-        int res = topDown(dp, 0, n - 1);
-        log.debug("res: {}", res);
-        return res;
+        for (int i = 0; i < s.length() - 1; i++) {
+            checkPalindrome(s, i, i);
+            checkPalindrome(s, i, i + 1);
+        }
+        log.debug("count: {}", count);
+        return count;
     }
 
-    public int topDown(int[][] dp, int b, int e) {
-        if (b > e) return 0;
-        if (b == e) return 1;
-        if (dp[b][e] > 0) return dp[b][e];
-        int res = 0;
-        for (int i = b; i < e; i++) {
-            res += (dp[b][i] + dp[i + 1][e]);
+    public void checkPalindrome(String s, int b, int e) {
+        while (b >= 0 && e < s.length() && s.charAt(b) == s.charAt(e)) {
+            count += 1;
+            b--;
+            e++;
         }
-        dp[b][e] = res;
-        return res;
     }
 }
