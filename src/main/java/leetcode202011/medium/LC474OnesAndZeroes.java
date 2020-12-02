@@ -41,8 +41,8 @@ public class LC474OnesAndZeroes extends BasicTemplate {
         for (int i = 1; i < dp.length; i++) {
             c0 = (int) strs[i].chars().filter(c -> c == '0').count();
             c1 = (int) strs[i].chars().filter(c -> c == '1').count();
-            for (int j = m; j < dp[i].length; j++)
-                for (int k = n; k < dp[i][j].length; k++) {
+            for (int j = 0; j < dp[i].length; j++)
+                for (int k = 0; k < dp[i][j].length; k++) {
                     if (c0 <= j && c1 <= k) {
                         dp[i][j][k] = Math.max(dp[i - 1][j][k], dp[i - 1][j - c0][k - c1] + 1);
                     } else dp[i][j][k] = dp[i - 1][j][k];
