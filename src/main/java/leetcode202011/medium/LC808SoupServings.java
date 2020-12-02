@@ -5,7 +5,7 @@ import leetcode20200921to20201031.BasicTemplate;
 public class LC808SoupServings extends BasicTemplate {
     public static void main(String[] args) {
         var LC = new LC808SoupServings();
-        var s = LC.soupServings(50);
+        var s = LC.soupServings(500);
     }
 
 
@@ -36,7 +36,7 @@ public class LC808SoupServings extends BasicTemplate {
                                 dp[Math.max(a - 2, 0)][Math.max(b - 2, 0)] +
                                 dp[Math.max(a - 1, 0)][Math.max(b - 3, 0)]));
             }
-
+        logDoubleArray(dp);
         return dp[n][n];
     }
 }
