@@ -46,6 +46,9 @@ public class LC801MinimumSwapsToMakeSequencesIncreasing extends BasicTemplate {
    * 1. 本來就嚴格遞增 `A[i-1] < A[i] && B[i-1] < B[i]` => 要換就i與i-1都換, 要嘛都不換, 才可以繼續保持嚴格遞增
    *  a. 但還可能符合 `A[i-1] < B[i] && B[i-1] < A[i]`來多做優化
    * 2. 沒有嚴格遞增, 但必然符合 `A[i-1] < B[i] && B[i-1] < A[i]` (這樣才可以透過交換i-th or (i-1)th 來達成嚴格遞增)
+   * 其中case 2可能包含 case 1, 這2者並沒有完全互斥, 所以得有個設定初始條件 keep[i] = swap[i] = A.length;
+   * 如果有1&2 => 因為先確認 if 1 才再確認 if 2 => 所以2要 Math.min(2 case, 1 case)
+   * 如果1, 2不是兩個獨立if做出來的, 應該不用 keep[i] = swap[i] = A.length;
    */
   public int minSwap(int[] A, int[] B) {
     if (A == null || A.length == 0 | A.length == 1) return 0;
