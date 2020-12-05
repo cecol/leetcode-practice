@@ -2,9 +2,6 @@ package leetcode202011.medium;
 
 import leetcode20200921to20201031.BasicTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LC1155NumberOfDiceRollsWithTargetSum extends BasicTemplate {
   public static void main(String[] args) {
     var LC = new LC1155NumberOfDiceRollsWithTargetSum();
