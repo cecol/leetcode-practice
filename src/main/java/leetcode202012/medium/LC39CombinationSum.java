@@ -24,7 +24,6 @@ public class LC39CombinationSum extends BasicTemplate {
     else if (remain == 0) res.add(new ArrayList<>(temp));
     else {
       for (int i = s; i < candidates.length; i++) {
-        if (i > s && candidates[i] == candidates[i - 1]) continue; // skip duplicates
         temp.add(candidates[i]);
         backtrack(res, temp, candidates, remain - candidates[i], i);
         temp.remove(temp.size() - 1);
