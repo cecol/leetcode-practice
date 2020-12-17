@@ -10,6 +10,10 @@ public class LC684RedundantConnection extends BasicTemplate {
     var s = LC.findRedundantConnection(new int[][]{{1, 1, 0}, {1, 1, 0}, {0, 0, 1}});
   }
 
+  /**
+   * great explanation
+   * https://leetcode.com/problems/redundant-connection/discuss/123819/Union-Find-with-Explanations-(Java-Python)
+   * */
   public int[] findRedundantConnection(int[][] edges) {
     int n = edges.length + 1;
     int[] p = new int[n];
