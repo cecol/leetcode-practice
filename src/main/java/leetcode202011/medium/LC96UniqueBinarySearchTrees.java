@@ -10,26 +10,21 @@ public class LC96UniqueBinarySearchTrees extends BasicTemplate {
     }
 
     public int numTrees(int n) {
+        if(n == 1) return 1;
         int[][] dp = new int[n][n];
-        var res = ct("", 0, n - 1, dp);
-        log.debug("{}", res);
-        return res;
+        return allB(dp,0,n-1);
     }
 
-    public int ct(String tab, int b, int e, int[][] dp) {
-        log.debug("{}b:{},e:{}", tab, b, e);
-        if (e - b == 1) return 2;
-        if (e == b) return 1;
-        if (dp[b][e] != 0) return dp[b][e];
-
-        int res = 0;
-        for (int i = b; i <= e; i++) {
-            log.debug("{}i:{}", tab, i);
-            if (b == i) res += ct(tab + "\t", i + 1, e, dp);
-            else if (e == i) res += ct(tab + "\t", b, i - 1, dp);
-            else res += ct(tab + "\t", b, i - 1, dp) * ct(tab + "\t", i + 1, e, dp);
+    private int allB(int[][] dp, int l, int r) {
+        if(l>=r) return 1;
+        if(dp[l][r] != 0) return dp[l][r];
+        int all = 0;
+        for(int i = l; i<=r;i++) {
+            int lb = allB(dp,l,i-1);
+            int rb = allB(dp,i+1,r);
+            all += lb*rb;
         }
-        dp[b][e] = res;
-        return res;
+        dp[l][r] = all;
+        return all;
     }
 }
