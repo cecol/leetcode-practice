@@ -1,6 +1,5 @@
-package leetcode201711;
+package leetcode_old.leetcode201711;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class LinkedListCycleII {

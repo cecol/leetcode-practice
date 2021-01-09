@@ -1,4 +1,4 @@
-package leetcode201712;
+package leetcode_old.leetcode201712;
 
 
 public class CombinationSumIV {

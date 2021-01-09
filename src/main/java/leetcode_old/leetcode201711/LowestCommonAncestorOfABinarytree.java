@@ -1,4 +1,4 @@
-package leetcode201711;
+package leetcode_old.leetcode201711;
 
 public class LowestCommonAncestorOfABinarytree {
     public class TreeNode {

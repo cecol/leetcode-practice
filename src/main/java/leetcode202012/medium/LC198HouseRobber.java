@@ -1,4 +1,4 @@
-package leetcode202012.easy;
+package leetcode202012.medium;
 
 import leetcode20200921to20201031.BasicTemplate;
 
