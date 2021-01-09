@@ -8,6 +8,10 @@ public class LC714BestTimeToBuyAndSellStockWithTransactionFee extends BasicTempl
         var s = LC.maxProfit(new int[]{}, 2);
     }
 
+    /**
+     * best idea and solutions
+     * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems
+     * */
     public int maxProfit(int[] prices, int fee) {
         int tik0 = 0;
         int tik1 = Integer.MIN_VALUE;
