@@ -16,4 +16,7 @@ public abstract class BasicTemplate {
   protected void logDoubleArray(double[][] d) {
     for (double[] i : d) log.debug("{}", i);
   }
+  protected void logBooleanArray(boolean[][] d) {
+    for (boolean[] i : d) log.debug("{}", i);
+  }
 }
