@@ -1,4 +1,4 @@
-package leetcode2021.medium;
+package leetcode202101.medium;
 
 import leetcode20200921to20201031.BasicTemplate;
 

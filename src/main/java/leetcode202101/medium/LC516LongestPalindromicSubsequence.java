@@ -1,10 +1,6 @@
-package leetcode2021.medium;
+package leetcode202101.medium;
 
 import leetcode20200921to20201031.BasicTemplate;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class LC516LongestPalindromicSubsequence extends BasicTemplate {
     public static void main(String[] args) {
