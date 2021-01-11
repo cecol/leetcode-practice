@@ -27,8 +27,7 @@ public class LC886PossibleBipartition extends BasicTemplate {
    * 1. 0 -> 還沒被分邊(還沒有顏色), 要DFS下去分邊
    * 2. -1 -> 被分到左邊(or填上藍色)
    * 3. 1 -> 被分到右邊(or填上紅色)
-   * 下去DFS, DFS是根據boolean[][] g的關聯下去遞迴
-   *
+   * 下去DFS, DFS是根據boolean[][] g的關聯下去遞迴, 如果遞迴中有誰回傳false 直接結束
    */
   public boolean possibleBipartition(int N, int[][] dislikes) {
     boolean[][] dislikeGraph = new boolean[N][N];
