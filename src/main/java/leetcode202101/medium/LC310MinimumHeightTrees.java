@@ -29,6 +29,7 @@ public class LC310MinimumHeightTrees extends BasicTemplate {
    * 直到node size < 2 因為只有中間點的1 or 2 node可以當作root來達成Min Height
    *
    * 所以就是透過 BFS 從leave出發, 過程中邊砍leave 如果剩下的節點少於2, 必然就是root
+   * 所以最後成為leaves的就是root(因為一開始一直從leave往上開始減,parent變成leave, 最後root也變成leave)
    * */
   public List<Integer> findMinHeightTrees(int n, int[][] edges) {
     if (n == 1) return Collections.singletonList(0);
