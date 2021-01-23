@@ -26,7 +26,7 @@ public class LC1584MinCostToConnectAllPoints extends BasicTemplate {
      * 真正實作是
      * 1 準備一個Set 紀錄有在MST中的Vertex
      * 2 一個走到該node的int[] dist(這邊是紀錄目前走到的node的dist,
-     * -   ex: dist[2] -> 就是MST計算過程中以記錄到走到node 2的dist, 但是起點可是MST其中某一點, 這邊沒有紀錄, 因為也用不到)
+     * -   ex: dist[2] -> 就是MST計算過程中已記錄到走到node 2的dist, 但是走到2的點是MST其中某一點(該點造成MST到2的距離是最小的), 這邊沒有紀錄, 因為也用不到)
      * -   所以意義上是用來記錄MST到各點的距離(只知道到該點距離, 但不知到是MST哪個點推算出來的, 該意義沒保存下來)
      * 1. 從node 0 開始 -> 加入MST, dist[i] 都是由0走到其他node的dist(因為此時MST只有node)
      * 2. 從dist中找到min值 -> 就是MST要繼續延伸到尚未觸及的node,且花最小cost -> 這樣最後才會形成MST
