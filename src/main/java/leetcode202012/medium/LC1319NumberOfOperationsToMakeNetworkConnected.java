@@ -5,10 +5,10 @@ import leetcode20200921to20201031.BasicTemplate;
 public class LC1319NumberOfOperationsToMakeNetworkConnected extends BasicTemplate {
   public static void main(String[] args) {
     var LC = new LC1319NumberOfOperationsToMakeNetworkConnected();
-    var s = LC.makeConnected(4, new int[][]{{0, 1}, {0, 2}, {1, 2}});
-    var s1 = LC.makeConnected(6, new int[][]{{0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 3}});
-    var s2 = LC.makeConnected(6, new int[][]{{0, 1}, {0, 2}, {0, 3}, {1, 2}});
-    var s3 = LC.makeConnected(5, new int[][]{{0, 1}, {0, 2}, {3, 4}, {2, 3}});
+//    var s = LC.makeConnected(4, new int[][]{{0, 1}, {0, 2}, {1, 2}});
+    var s1 = LC.makeConnected(6, new int[][]{{0, 1}, {0, 2}, {0, 3}, {1, 2}, {4, 5}});
+//    var s2 = LC.makeConnected(6, new int[][]{{0, 1}, {0, 2}, {0, 3}, {1, 2}});
+//    var s3 = LC.makeConnected(5, new int[][]{{0, 1}, {0, 2}, {3, 4}, {2, 3}});
   }
 
   public int makeConnected(int n, int[][] connections) {

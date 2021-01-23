@@ -14,6 +14,10 @@ public class LC947MostStonesRemovedWithSameRowOrColumn extends BasicTemplate {
 
   /**
    * https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/discuss/197693/Java-Union-Find
+   * 我這題被stones的[x,y]迷惑, 以為要union x,y
+   * 其實是要union stone, stone 每個要給一個虛擬的代碼(就拿offset來當代碼, 來做union find)
+   * 每兩兩stone可否連再一起就是, 看 x1==x2 or y1==y2
+   * 最後沒有連在一起的stone就是不可以刪除的stones
    */
   public int removeStones(int[][] stones) {
     int n = stones.length;
