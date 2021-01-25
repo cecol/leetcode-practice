@@ -27,7 +27,14 @@ public class LC886PossibleBipartition extends BasicTemplate {
    * 1. 0 -> 還沒被分邊(還沒有顏色), 要DFS下去分邊
    * 2. -1 -> 被分到左邊(or填上藍色)
    * 3. 1 -> 被分到右邊(or填上紅色)
-   * 下去DFS, DFS是根據boolean[][] g的關聯下去遞迴, 如果遞迴中有誰回傳false 直接結束
+   * main function 找出還沒上色的, 看能否DFS下去上色 -> 下去DFS function
+   * DFS是根據boolean[][] g的關聯下去遞迴繼續上色, 如果遞迴中有誰回傳false(上不了色) 直接結束
+   *
+   * 關鍵是從還沒色開始 -> 找點開始嘗試給他上色 -> DFS下去把他相關的都去上色看看 -> 都上色完 -> true 否則就是false
+   *
+   * 我第二次解錯是一直覺得跟union find有關係 但其實也沒有
+   * 而且也沒想到應該先把 int[][] dislikes 轉成boolean[][] dislikeGraph
+   * 用 boolean[][] dislikeGraph 來DFS下去一直上色
    */
   public boolean possibleBipartition(int N, int[][] dislikes) {
     boolean[][] dislikeGraph = new boolean[N][N];
