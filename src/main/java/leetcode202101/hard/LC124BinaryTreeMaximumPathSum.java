@@ -15,7 +15,7 @@ public class LC124BinaryTreeMaximumPathSum extends BasicTemplate {
     /**
      * https://leetcode.com/problems/binary-tree-maximum-path-sum/discuss/39775/Accepted-short-solution-in-Java
      * 其實這題跟687邏輯一樣
-     * 我原本以為我姐的出來, 但我卡死在因為有負值, 一直算錯負值情境
+     * 我原本以為我解的出來, 但我卡死在因為有負值, 一直算錯負值情境
      * 後來還是參考答案才恍然大悟
      * left如果回傳的單邊子子樹也小於0 不如不要
      * right也同理
