@@ -5,12 +5,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.TreeNode;
 
-import java.util.*;
-
-public class LC236236LowestCommonAncestorOfABinaryTree extends BasicTemplate {
+public class LC236LowestCommonAncestorOfABinaryTree extends BasicTemplate {
     public static void main(String[] args) {
         Logger log = LoggerFactory.getLogger("Main");
-        var LC = new LC236236LowestCommonAncestorOfABinaryTree();
+        var LC = new LC236LowestCommonAncestorOfABinaryTree();
         var s = LC.lowestCommonAncestor(null, null, null);
     }
 
