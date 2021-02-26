@@ -25,6 +25,7 @@ public class LC685RedundantConnectionII extends BasicTemplate {
      * -> 1. 有node有兩個parent -> 2 in degree (parent可以有多個child)
      * -> 2. 有cycle -> 可能是沒有root -> 就是沒有node是 0 in-degree -> or 有人是1的情境
      * 依此來想就可以很清楚知道 如果去看所有node的 in degree 就大概可以知道哪個edge是多餘的
+     * 3. 有多個edge選擇可以刪除達成合法樹要求, 但題目要拿後面的edge來刪除, 因此要從後面開始找多餘得edge
      * <p>
      * 這個回應裡面的第一個回應的解法比較理解 所以採用
      * https://leetcode.com/problems/redundant-connection-ii/discuss/108045/C%2B%2BJava-Union-Find-with-explanation-O(n)
@@ -33,8 +34,15 @@ public class LC685RedundantConnectionII extends BasicTemplate {
      * 1. 先找出哪個node是否 in degree == 2
      * -> 1. 如果沒有, 代表是純cycle case -> 沒有root->沒有node是in-degree == 0
      * ->    因此所有edge下去union -> 只會有唯一一個造成cycle -> 回傳的那個就是
+     * ->    btw, 因為union過程是由edges的第一個邊開始union,
+     * ->    cycle中任一邊刪除其實都沒關係, 但因為union 是由頭開始建立
+     * ->    所以會是最後面edge加入後才發現造成cycle
      * -> 2. 如果有 -> 可能有多個邊都可以選來刪除來達成合法 tree -> 所以需要拿最後一個邊
-     * ->    所以從edges最後開始找, 若找到有edge有的node是 two in degree -> 省略該edge -> 下去建立union
+     * ->    所以從edges最後開始找, 若找到有edge有的node是 two in degree -> 試著省略該edge -> 下去建立union
+     * ->    會要從edges最後開始找有踩到inDegree node == 2的edge開始skip下去建立union來確認是否是要刪除的邊
+     * ->    是因為題目有要求, 如果有多個邊都可以刪除來達成tree, 那就刪除最後一個
+     * ->    因此得從edges最後開始來檢查, 絕對不能從edges第一條開始檢查
+     * ->    其實也隱含edges裡面的次序, 是前面都可以建立合法樹, 造成不合法的都是在後面的edge造成
      * ->    若省略該edge可以建立出tree(684 algo return null) -> 代表該edge就是答案
      * ->    其中
      * ->    int[] res = getRedundantEdge(edges, i);
