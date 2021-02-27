@@ -37,7 +37,7 @@ public class LC99RecoverBinarySearchTree extends BasicTemplate {
    *  所以當進入中序的business中 -> 可以視為prevEle已經被set好 -> 可以直接檢查first & second
    *  先檢查 first
    *  if(firstEle == null && prevEle.val > n.val) firstEle = prevEle;
-   *  當first還沒找到, 但當前node n大於前一個prevELe -> 不符合中序(因為左邊已走完,prevEle應該小於當前node)
+   *  當first還沒找到, 但當前node n小於前一個prevELe -> 不符合中序(因為左邊已走完,prevEle應該小於當前node)
    *  -> 所以prev必然是firstEle, 因為prev是錯置的
    *  if(firstEle != null && prevEle.val > n.val) secondEle = n;
    *  當first找到了, 就是找second -> 當前node n小於前一個prevELe -> 不符合中序(因為左邊已走完,prevEle應該小於當前node)

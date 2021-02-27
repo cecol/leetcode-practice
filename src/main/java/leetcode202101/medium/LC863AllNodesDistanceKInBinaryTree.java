@@ -14,7 +14,11 @@ public class LC863AllNodesDistanceKInBinaryTree extends BasicTemplate {
     LC.distanceK(null, null, 0);
   }
 
-  Map<TreeNode, Integer> pathToTarget = new HashMap<>();
+  /**
+   * 只用來記錄 root -> target 中間路徑的所有是 target 的父輩or祖父輩到target的路徑
+   * 所以其他不是位在root -> target 的node都不會在裡面
+   * */
+  Map<TreeNode, Integer> toTarget = new HashMap<>();
 
   /**
    * https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/discuss/143798/1ms-beat-100-simple-Java-dfs-with(without)-hashmap-including-explanation
@@ -24,6 +28,14 @@ public class LC863AllNodesDistanceKInBinaryTree extends BasicTemplate {
    * -> 就是說如果dfs中帶下來的 int length == K 就代表該點確實是其中一個答案
    * 然後dfs左右子樹下去
    *
+   * 這題有個關鍵是, 要先釐清只有兩種情境
+   * 1. target 的子樹,子子樹的節點到target的距離
+   * ->   這個用dfs解, 不用特別存路徑長度, 只要過程中把距離待下去, 然後看看是否是要求的K就好
+   * 2. root -> target 途中的target 父輩, 祖父輩到target的情境
+   * ->   這個得先算過把它存成map, 當dfs走到時候可以拿來出用
+   * ->   會有情境2是因為 target 是在樹中的任意一個點, 而我們也只能從root走下去, 所以如果dfs是(node.left + 1)
+   * ->   從root開始中間走到的 parent再到target 就不能用 root.left + 1
+   * ->   而如果是中間岔開的node(不是target的祖父輩), 自然一定得經過root, 就得dfs(node.left + 1)
    * 解答中有個論述是
    * node -> target 如果距離剛好是K -> 那node的 child -> target應該是k+1
    * 除非node的 child 離target更近 -> 這樣既代表 target 是node的兒子
@@ -42,7 +54,7 @@ public class LC863AllNodesDistanceKInBinaryTree extends BasicTemplate {
    * 總結來說
    * 直觀上 當前node的child到target的距離應該是 當前node到target距離+1
    * -> 可是如果target是node的child -> 當前node的child到target可能不見得就是：當前node到target距離+1
-   * -> 所以得先建立好root -> target 的中間每個target的parent到target的距離
+   * -> 所以得先建立好root -> target 的中間每個點到target的距離, 中間都是target的父輩或者祖父輩
    * 然後dfs就用child+1來找, 但會配上述資訊來特別處理target是node的child的case
    *
    * 我這題困擾就是不會好好處理 任何是target的parent到target的case
@@ -51,31 +63,31 @@ public class LC863AllNodesDistanceKInBinaryTree extends BasicTemplate {
   public List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
     List<Integer> res = new ArrayList<>();
     find(root, target);
-    dfs(root, K, pathToTarget.get(root), res);
+    dfs(root, K, toTarget.get(root), res);
     return res;
   }
 
   private void find(TreeNode root, TreeNode target) {
     if (root == null) return;
     if (root == target) {
-      pathToTarget.put(root, 0);
+      toTarget.put(root, 0);
       return;
     }
     find(root.left, target);
-    if (pathToTarget.containsKey(root.left)) {
-      pathToTarget.put(root, pathToTarget.get(root.left) + 1);
+    if (toTarget.containsKey(root.left)) {
+      toTarget.put(root, toTarget.get(root.left) + 1);
       return;
     }
     find(root.right, target);
-    if (pathToTarget.containsKey(root.right)) {
-      pathToTarget.put(root, pathToTarget.get(root.right) + 1);
+    if (toTarget.containsKey(root.right)) {
+      toTarget.put(root, toTarget.get(root.right) + 1);
       return;
     }
   }
 
   private void dfs(TreeNode cur, int K, int length, List<Integer> res) {
     if (cur == null) return;
-    if (pathToTarget.containsKey(cur)) length = pathToTarget.get(cur);
+    if (toTarget.containsKey(cur)) length = toTarget.get(cur);
     if (length == K) res.add(cur.val);
     dfs(cur.left, K, length + 1, res);
     dfs(cur.right, K, length + 1, res);
