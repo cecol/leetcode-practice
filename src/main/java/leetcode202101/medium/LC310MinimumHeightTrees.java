@@ -24,7 +24,7 @@ public class LC310MinimumHeightTrees extends BasicTemplate {
    * 基本概念就是從leave(degree == 1)出發,過程中就找到parent
    * (不從leave開始找, 就是把leave當作的tree root,一定不會是Min Height, 因為leave當root會造成longest path -> Max height)
    * 每拿到leave就把node size -= 1
-   * 把parent的到leave中間的edge拆掉, 這時候parent可能就成為 new leave,
+   * 把 leave 到 parent 中間的edge拆掉, 這時候parent可能就成為 new leave,
    * 然後再把new leave放到leaves繼續下去找,
    * 直到node size < 2 因為只有中間點的1 or 2 node可以當作root來達成Min Height
    *

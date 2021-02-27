@@ -50,6 +50,16 @@ public class LC117PopulatingNextRightPointersInEachNodeII extends BasicTemplate 
    * dummyNode 幫助切換 current node
    * dummyNode.next 來幫助切換 current parent ->
    * 利用一開始 curLevelNode = dummyNode => curLevelNode.next = curParent.left; == dummyNode.next = curParent.left
+   *
+   * 2刷 重點整理
+   * 1. dummy 永遠指向 Node(0),
+   * 2. curParent.next 永遠都已經接好, curParent.next都接好了, 所以可依一直 curParent = curParent.next
+   * 3. 真正在level走的是 curLevelNode, 他會一直
+   * -> 1. 有得走: curLevelNode = curParent.left or curParent.right  然後 curLevelNode = curLevelNode.next走下去
+   * -> 2. 沒得走(curParent.next == null), 得換層, curLevelNode先走回dummy, 固定位置,
+   * ->     dummy.next 仍是 curLevel 第一個所以 curParent 要往下走的話, 就得 curParent = dummy.next達成換層
+   * ->     從頭到尾都是 dummy.next來當換層
+   * 4. 用迴圈解就好, 我通常都以為 tree用遞迴解, 然後就在想先遞迴左子樹還是右子樹, 但事實上如果是 level 走下去, 其實應該 while可以
    */
   public Node connect(Node root) {
     Node dummyNode = new Node(0);
@@ -73,4 +83,44 @@ public class LC117PopulatingNextRightPointersInEachNodeII extends BasicTemplate 
     }
     return root;
   }
+
+    /**
+     * 二刷後覺得 dummy的做法是比較精簡但不直覺, 因為是透過dummy.next來換層,
+     * 其實重點是要
+     * 1. 換層邏輯 -> 記住當前層的 head 來讓當parent走完時候換層
+     * 2. 還沒換層一直往下走 -> 當前層的cur.next 一直往下指
+     * 這個解法code比較多一點, 但速度應該差不多
+     * */
+    public Node connect2(Node root) {
+        Node cur = null;
+        Node curH = null;
+        Node p = root;
+        while(p != null) {
+            if(p.left != null) {
+                if(cur == null) {
+                    cur = p.left;
+                    curH=cur;
+                } else {
+                    cur.next = p.left;
+                    cur=cur.next;
+                }
+            }
+            if(p.right != null) {
+                if(cur == null) {
+                    cur = p.right;
+                    curH=cur;
+                } else {
+                    cur.next = p.right;
+                    cur=cur.next;
+                }
+            }
+            p=p.next;
+            if(p==null) {
+                p=curH;
+                cur=null;
+                curH=null;
+            }
+        }
+        return root;
+    }
 }
