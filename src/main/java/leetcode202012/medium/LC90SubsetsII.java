@@ -27,7 +27,7 @@ public class LC90SubsetsII extends BasicTemplate {
    * nums[i] == nums[i - 1] 確實知道目前處理到重複
    * 但重複是指當前迴圈已處理過的 因此第一個 i=s 都要被處理
    * 是 s+1 -> nums.length 中間有重複才要略過,
-   * 因此 i>0 是把第一個都省略了, 這時候根本還沒發生重複
+   * 因此 i>0 是把第一個都省略了, 這時候根本還沒發生重複 所以刪除掉不該刪除的
    * */
   public void sub(List<List<Integer>> res, List<Integer> tmp, int[] nums, int s) {
     res.add(new ArrayList<>(tmp));
