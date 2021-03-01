@@ -41,7 +41,12 @@ public class LC47PermutationsII extends BasicTemplate {
    * 其中
    * -  used[i]代表該元素用過 -> 一定不拿來建構
    * -  i > 0 && n[i] == n[i - 1] && !used[i - 1] 在該層換新元素建構, 而換到的建構元素, 前一次也用過
-   * -    但上面前提是int[] nums有拿來排序過, 相同元素都會擺在一起, 如果相同元素沒有擺在鄉鄰 -> 這個解法就行不通
+   * -    但上面前提是int[] nums有拿來排序過, 相同元素都會擺在一起, 如果相同元素沒有擺在相鄰 -> 這個解法就行不通
+   * -    !used[i - 1] 比較特別, 怎會是看前一個要沒用過呢?
+   * -    主因是前一個最後會被set成 used[i] = false; 這時候的下一個如果重複 (i, i-1) 的關係才是因同一層重複而要拿掉
+   * -    因為每一層都是從0開始, 所以要分清楚同層遞迴還是不同層
+   * -    所以如果 i > 0 && n[i] == n[i - 1] 成立但是 !used[i - 1]不成立 代表, used[i-1] = true
+   * -    此時的i不應該被省略, 因為他是下一層的i, 看到的 i-1是上一層的, 此時 i 要被納入
    * */
   public void backtrack(List<List<Integer>> res, List<Integer> t, int[] n, boolean[] used) {
     if (t.size() == n.length) res.add(new ArrayList<>(t));
