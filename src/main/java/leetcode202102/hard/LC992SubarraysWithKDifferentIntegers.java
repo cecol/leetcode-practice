@@ -17,7 +17,9 @@ public class LC992SubarraysWithKDifferentIntegers extends BasicTemplate {
     /**
      * 這題真難, 還在參透中
      * https://leetcode.com/problems/subarrays-with-k-different-integers/discuss/523136/JavaC%2B%2BPython-Sliding-Window
-     *
+     * 後來解了幾題 atMost概念, 就完全理解這種 sybarray(sliding window)的計數就善用
+     * window 從小長到大, 擴表, 邊長大只要條件還=<K,就邊計數(但這過程中計數到多餘的<K案例)
+     * 如果條件不合, 就縮表直到條件符合
      * */
     public int subarraysWithKDistinct(int[] A, int K) {
         return atMost(A, K) - atMost(A, K - 1);
