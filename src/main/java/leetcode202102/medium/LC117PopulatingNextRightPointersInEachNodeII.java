@@ -60,6 +60,11 @@ public class LC117PopulatingNextRightPointersInEachNodeII extends BasicTemplate 
    * ->     dummy.next 仍是 curLevel 第一個所以 curParent 要往下走的話, 就得 curParent = dummy.next達成換層
    * ->     從頭到尾都是 dummy.next來當換層
    * 4. 用迴圈解就好, 我通常都以為 tree用遞迴解, 然後就在想先遞迴左子樹還是右子樹, 但事實上如果是 level 走下去, 其實應該 while可以
+   *
+   * 3刷
+   * 總算釐清為什麼 走完當層之後得dummyNode.next = null;
+   * 這是為了最後一層, 當curParent來到最後一層, 就會都沒有 left & right 要 next
+   * 就又會走回  curParent = dummyNode.next; 然後進入無窮迴圈, 一直在最後一層走下去
    */
   public Node connect(Node root) {
     Node dummyNode = new Node(0);

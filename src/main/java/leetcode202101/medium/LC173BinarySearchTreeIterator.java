@@ -52,7 +52,7 @@ public class LC173BinarySearchTreeIterator extends BasicTemplate {
    * ->        也可以視為: tmp.right是真的有其右兒子(所以當然不能亂改R, 也不能改為current) -> 不是原本null right被指向next parent current
    * ->    if(tmp.right == null) 指向當前 current, 還沒要印, 因為最小的還沒走到, 繼續往最左current = current.left -> 離開進入迴圈繼續往下找出最左
    * ->       這一塊只有在一開始 current = root, 要把current移到中序最一開始有用, 在這個移動過程中把leave right node引線建立起來
-   * ->    if(tmp.right != null) -> 代表走到最左,引線也已經都建立完成, 所有right 都有值1. 要馬是原本自己的right child, 2.要馬是引線parent
+   * ->    if(tmp.right != null) -> 代表走到最左,引線也已經都建立完成, 所有right 都有值: 1. 要馬是原本自己的right child, 2.要馬是引線parent
    * ->       然後current 指向下一個 current = current.right;
    * ->       tmp.right = null; 是把原本的引線right還原成null,
    * */

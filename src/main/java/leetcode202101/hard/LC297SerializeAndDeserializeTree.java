@@ -17,7 +17,7 @@ public class LC297SerializeAndDeserializeTree extends BasicTemplate {
 
     /**
      * https://leetcode.com/problems/serialize-and-deserialize-binary-tree/discuss/74253/Easy-to-understand-Java-Solution
-     * 我一開始以為是跟BST serialize & deserialize很類似(因為那提的捷達也有提到BT, 但我沒細看)
+     * 我一開始以為是跟BST serialize & deserialize很類似(因為那提的解答也有提到BT, 但我沒細看)
      * 但沒想到更簡單的是, 直接用preorder, 尤其是null node用一個特殊字元下去encode就好了
      * 這樣因為serialize出來的就是完整的樹,
      * 因為一定有左右兒子 -> 只是是真的樹還是null, 是null就直接回傳, 真的樹就繼續的回下去
