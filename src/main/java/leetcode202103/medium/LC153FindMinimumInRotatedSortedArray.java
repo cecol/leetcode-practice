@@ -18,15 +18,9 @@ public class LC153FindMinimumInRotatedSortedArray extends BasicTemplate {
      * 沒想到 rotate array , 用很基本的 binary search 就可以解
      * 其實只要比 nums[mid] < nums[r] -> 代表一定遞增 -> 那麼最小 不可能是 m+1 -> r之間, worst case 也只會是 nums[m]
      * 而其他case 就是 l 要移動到 m+1
-     * 其實另一個判定就是 nums[m] >= nums[l] && nums[m] > nums[r]
-     * 我其實沒有很明白 為什麼
-     * l,r 移動時候, 有時候是 l = m + 1, 有時候是 l = m;
-     * 應該是有細節的邏輯在其中
-     * 這題的解法 nums[mid] < nums[r] 是比較直觀 r = m;, 因為 不可能是 m+1 -> r之間 -> 但為什麼其他case 就要 l = m+1;
-     * 其實隱含的是 其他cases , nums[m]不會是答案, 所以直接跳過 m
-     * 總有一邊縮減要 m + 1 or m - 1
-     * 看來要考慮的是, 在那個情境下, nums[m]是否是淺在對象
-     * 所以 當 nums[m] > nums[r] -> 代表 m->r 之間有下去又有上來, nums[m] 一定不是選項 所以縮l 時候要 l = m+1;
+     * 後來再次思考是因為關鍵是遞增array 排序, 不管怎麼 rotate -> 右邊一定比自己大, 如果右邊沒有比自己大, 代表rotate過, 最小已經在右邊了
+     * 1. 最右邊比自己大 -> 一路遞增過去 -> 代表最小一定不在右邊 h = m
+     * 2. 最右邊比自己小 -> 遞增排序好的 array不會有這種情況-> 代表是rotate case -> 最小在右邊 l = m+1
      * */
     public int findMin(int[] nums) {
         int n = nums.length;

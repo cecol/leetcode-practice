@@ -21,7 +21,7 @@ public class LC862ShortestSubarrayWithSumAtLeastK extends BasicTemplate {
      * 解題關鍵
      * -> subarray sum >= K, 先轉成 prefix sum array 就可以執行下面
      * -> 用 prefix sum 找 min sliding window >= K (不是原本的 array做 min sliding window)
-     * -> 因為有複數, 所以 prefix sum 會在負數時候下降, 這導致後面有可能有 shorter sliding window,
+     * -> 因為有負數, 所以 prefix sum 會在負數時候下降, 這導致後面有可能有 shorter sliding window,
      * -> 所以用遞增queue來記載 prefix sum window start
      * 1. 一個array 儲存到目前為止的prefix sum,
      * 2. 是用一個queue維持遞增的prefix sum index起點

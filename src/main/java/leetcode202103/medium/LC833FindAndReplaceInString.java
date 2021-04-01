@@ -16,18 +16,42 @@ public class LC833FindAndReplaceInString extends BasicTemplate {
     }
 
     /**
+     * O(n)
+     * https://leetcode.com/problems/find-and-replace-in-string/discuss/134758/Java-O(n)-solution
+     * 想不到可以快成這樣
+     * 直接用 map 建立要用到的 index, 然後S 從頭換, 完全略過 sort的需求, 真的厲害多了, 應該用這種解法
+     */
+    public String findReplaceString(String S, int[] indexes, String[] sources, String[] targets) {
+        Map<Integer, Integer> table = new HashMap<>();
+        for (int i = 0; i < indexes.length; i++) {
+            // if a match is found in the original string, record it
+            if (S.startsWith(sources[i], indexes[i])) {
+                table.put(indexes[i], i);
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < S.length(); ) {
+            if (table.containsKey(i)) {
+                // if a replacement was recorded before
+                sb.append(targets[table.get(i)]);
+                i += sources[table.get(i)].length();
+            } else {
+                // if no replacement happened at this index
+                sb.append(S.charAt(i));
+                i++;
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
      * 很直觀的解出來了, 因為indexes不是遞增, 用priority queue 來先記載要處理的區間, 讓後續一直poll 可以一直處理下去
      * 然後就用 StringBuilder 根據記載好的區間下去處理
      * https://leetcode.com/problems/find-and-replace-in-string/discuss/130587/C%2B%2BJavaPython-Replace-S-from-right-to-left
      * 竟然比這個還要快, 可能因為他是先組好要建立的區間後 再sort
      * 沒想到priority queue的方法快不少
-     *
-     * 不過後來看到這個 O(n)
-     * https://leetcode.com/problems/find-and-replace-in-string/discuss/134758/Java-O(n)-solution
-     * 想不到可以快成這樣
-     * 直接用 map 建立要用到的 index, 然後S 從頭換, 完全略過 sort的需求, 真的厲害多了, 應該用這種解法
-     * */
-    public String findReplaceString(String S, int[] indexes, String[] sources, String[] targets) {
+     */
+    public String findReplaceString2(String S, int[] indexes, String[] sources, String[] targets) {
         StringBuilder sb = new StringBuilder();
         PriorityQueue<int[]> p = new PriorityQueue<>(Comparator.comparingInt(i -> i[0]));
         for (int i = 0; i < indexes.length; i++) {

@@ -28,7 +28,7 @@ public class LC371SumOfTwoIntegers extends BasicTemplate {
      * 3    =>  011
      * 2    =>  010
      * 3&2  =>  010
-     * XOR(非進位的加法) 配上 &(處理進位case) 來時間加法
+     * XOR(非進位的加法) 配上 &(處理進位case) 來實踐加法
      * ex:
      * 3 ^2        =>  001
      * (3&2)<<1    =>  100

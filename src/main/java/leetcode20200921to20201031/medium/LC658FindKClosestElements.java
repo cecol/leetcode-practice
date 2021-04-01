@@ -24,7 +24,7 @@ public class LC658FindKClosestElements extends BasicTemplate {
      */
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
         int l = 0, h = arr.length - 1;
-        while (h - l >= k) {
+        while (h - l + 1 > k) {
             if (Math.abs(x - arr[l]) > Math.abs(x - arr[h])) l++;
             else h--;
         }

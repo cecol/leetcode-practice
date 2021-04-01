@@ -27,7 +27,7 @@ public class LC239SlidingWindowMaximum extends BasicTemplate {
      * -> 原文回答解釋
      * Now only those elements within [i-(k-1),i] are in the deque.(存目前sliding window 看到的數字)
      * We then discard elements smaller than a[i] from the tail.
-     * This is because if a[x] <a[i] and x<i, then a[x] has no chance to be the "max" in [i-(k-1),i],
+     * This is because if a[x] < a[i] and x<i, then a[x] has no chance to be the "max" in [i-(k-1),i],
      * or any other subsequent window: a[i] would always be a better candidate.
      */
     public int[] maxSlidingWindow(int[] nums, int k) {
@@ -38,7 +38,7 @@ public class LC239SlidingWindowMaximum extends BasicTemplate {
         Deque<Integer> q = new LinkedList<>();
         for (int j = 0; j < nums.length; j++) {
             while (q.size() > 0 && q.peek() < j - k + 1) q.poll();
-            while (q.size() > 0 && nums[q.peek()] < nums[j]) q.pollLast();
+            while (q.size() > 0 && nums[q.peekLast()] < nums[j]) q.pollLast();
             q.offer(j);
             if (j >= k - 1) r[i++] = nums[q.peek()];
         }

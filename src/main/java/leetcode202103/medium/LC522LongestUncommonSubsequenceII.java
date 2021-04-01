@@ -34,12 +34,7 @@ public class LC522LongestUncommonSubsequenceII extends BasicTemplate {
      * -> 如果是比較短的字串x, 這樣就要回頭找比x長的是不是有包含x的Subsequence
      */
     public int findLUSlength(String[] strs) {
-        Arrays.sort(strs, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.length() - o2.length();
-            }
-        });
+        Arrays.sort(strs, (s1, s2) -> s2.length() - s1.length());
 
         Set<String> dup = getDup(strs);
         for (int i = 0; i < strs.length; i++) {
@@ -54,13 +49,13 @@ public class LC522LongestUncommonSubsequenceII extends BasicTemplate {
         return -1;
     }
 
-    private boolean isSub(String a, String b) {
+    private boolean isSub(String longer, String shorter) {
         int i = 0, j = 0;
-        while (i < a.length() && j < b.length()) {
-            if (a.charAt(i) == b.charAt(j)) j++;
+        while (i < longer.length() && j < shorter.length()) {
+            if (longer.charAt(i) == shorter.charAt(j)) j++;
             i++;
         }
-        return j == b.length();
+        return j == shorter.length();
     }
 
     private Set<String> getDup(String[] strs) {

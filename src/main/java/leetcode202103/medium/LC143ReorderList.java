@@ -27,18 +27,16 @@ public class LC143ReorderList extends BasicTemplate {
             fast = fast.next.next;
         }
 
-        ListNode preMiddle = slow;
-        ListNode middle = slow.next;
-        ListNode reversedSecondHalf = reverse(middle);
-        preMiddle.next = null;
+        ListNode secHead = reverse(slow.next);
+        slow.next = null;
 
-        while (head != null && reversedSecondHalf != null) {
+        while (head != null && secHead != null) {
             ListNode t1 = head.next;
-            ListNode t2 = reversedSecondHalf.next;
-            reversedSecondHalf.next = head.next;
-            head.next = reversedSecondHalf;
+            ListNode t2 = secHead.next;
+            secHead.next = t1;
+            head.next = secHead;
             head = t1;
-            reversedSecondHalf = t2;
+            secHead = t2;
         }
 
     }

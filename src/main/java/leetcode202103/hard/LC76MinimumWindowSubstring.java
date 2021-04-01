@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class LC76MinimumWindowSubstring extends BasicTemplate {
+public class
+LC76MinimumWindowSubstring extends BasicTemplate {
     public static void main(String[] args) {
         Logger log = LoggerFactory.getLogger("Main");
         var LC = new LC76MinimumWindowSubstring();

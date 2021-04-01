@@ -13,7 +13,7 @@ public class LC13RomanToInteger extends BasicTemplate {
     public static void main(String[] args) {
         Logger log = LoggerFactory.getLogger("Main");
         var LC = new LC13RomanToInteger();
-        LC.romanToInt("III");
+        LC.romanToInt2("IV");
     }
 
     /**
@@ -63,7 +63,7 @@ public class LC13RomanToInteger extends BasicTemplate {
     }
 
     /**
-     * j用很直接的邏輯計算是會過, 但速度比較慢, 看別人答案才覺得真的是我想得太簡單了
+     * 用很直接的邏輯計算是會過, 但速度比較慢, 看別人答案才覺得真的是我想得太簡單了
      */
     Map<Character, Integer> roman = Map.of(
             'I', 1,
@@ -94,5 +94,27 @@ public class LC13RomanToInteger extends BasicTemplate {
             }
         }
         return r;
+    }
+
+    /**
+     * 自己好像有印象的更快解法, 先全部加起來 然後回頭找找把多加的扣回來
+     * */
+    public int romanToInt2(String s) {
+        int res = 0;
+        for(char c: s.toCharArray()) {
+            if(c == 'I') res += 1;
+            else if(c == 'V') res += 5;
+            else if(c == 'X') res += 10;
+            else if(c == 'L') res += 50;
+            else if(c == 'C') res += 100;
+            else if(c == 'D') res += 500;
+            else if(c == 'M') res += 1000;
+        }
+        for(int i=0;i<s.length()-1;i++) {
+            if(s.charAt(i) == 'I' && (s.charAt(i+1) == 'V' || s.charAt(i+1) == 'X')) res-=2;
+            else if(s.charAt(i) == 'X' && (s.charAt(i+1) == 'L' || s.charAt(i+1) == 'C')) res-=20;
+            else if(s.charAt(i) == 'C' && (s.charAt(i+1) == 'D' || s.charAt(i+1) == 'M')) res-=200;
+        }
+        return res;
     }
 }

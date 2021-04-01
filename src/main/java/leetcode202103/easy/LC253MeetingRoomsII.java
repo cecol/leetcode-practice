@@ -23,6 +23,15 @@ public class LC253MeetingRoomsII extends BasicTemplate {
      * int[] ends = new int[intervals.length];
      * 個別排序完, set int endsItr = 0;
      * 去 iterate starts -> 如果 starts[i] < ends[endsItr] -> rooms++ else endsItr++
+     * 第二次沒有解出來, 好好參考人家的解法, 才理解為什麼會先分成
+     * start, end來看 並且各自sort, 看起來各自sort會造成順序錯亂, 但事實上, end一定晚於 start, 因此
+     * end[0] 一定大於 start[0], 因為每一個 end都配有一個比他早的 start
+     * 再來就是邏輯關鍵
+     * if(starts[i]<ends[endsItr]) rooms++; else endsItr++;
+     * starts[i]<ends[endsItr] 代表的是 當前starts[i]的時間還早於當前ends[endsItr] -> 代表 rooms++
+     * starts[i]>=ends[endsItr] 代表的是前面的會議室end time已經有空缺出來, 可以給當前的 starts[i]用, 看下一個end time
+     * 其實每次的  endsItr++; 可以視為有一間房間空缺出來, 所以當下 room 不必 ++
+     * 而每次的 i++ 都是要個會議室
      * */
     public int minMeetingRoomsHeapFastest(int[][] intervals) {
         int[] starts = new int[intervals.length];

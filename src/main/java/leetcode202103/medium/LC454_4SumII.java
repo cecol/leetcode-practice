@@ -36,6 +36,8 @@ public class LC454_4SumII extends BasicTemplate {
      * 我一直有錯覺 覺得拆成兩個 nest loop 就破壞了 4 nest loop的組合
      * 但事實上並沒有, 他只是先把 caching A,B combination in Map rather than get A,B in extra two outer loops
      * 兩著雖然時間複雜度天差地遠, 但語意是依樣的, 重點在於 Map就像種特殊催化劑, 達成跟4 nest loop 依樣效果
+     * 而且答案要的是 tuple of (i, j, k, l) 他是 offset的組合, 因為offset的組合不同於值的組合
+     * offset組合不會有重複, 但是值的組合會因為重複或者次序所以有重複case -> 因此跟 3SUM的算法又不一樣
      */
     public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
         if (A.length == 0) return 0;

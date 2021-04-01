@@ -19,7 +19,7 @@ public class LC55JumpGame extends BasicTemplate {
      * 後來想說從尾巴往前倒推, 但是一直沒有想出正確辦法, 也不確定這樣想是否正確
      * 直到看到最佳解
      * https://leetcode.com/problems/jump-game/discuss/20900/Simplest-O(N)-solution-with-constant-space
-     * 是重最後開始nums.length - 2找沒錯, 但是要記得一開始的 last = nums.length - 1;
+     * 是從最後開始nums.length - 2找沒錯, 但是要記得一開始的 last = nums.length - 1;
      * 然後因為 i 可以到達 last, last就變成 i 繼續下去
      */
     public boolean canJump(int[] nums) {

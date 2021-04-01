@@ -22,11 +22,15 @@ public class LC15_3Sum extends BasicTemplate {
      * 1. 先排序
      * 2. 從第一個開始往後找符合的 sum
      * 其實這個解法一開始有想到, 但就被我拋棄惹, 覺得應該不是這樣
+     *
+     * 多補上一個 if(nums[i] > 0) break;
+     * 因為排序過了, nums[i] 後面一定比 nums[i] 還大, 所以當nums[i] > 0, 後面都可以不用看了
      * */
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> res = new ArrayList<>();
         for (int i = 0; i < nums.length - 2; i++) {
+            if(nums[i] > 0) break;
             if (i == 0 || nums[i] != nums[i - 1]) {
                 int lo = i + 1, hi = nums.length - 1, sum = -nums[i];
                 while (lo < hi) {

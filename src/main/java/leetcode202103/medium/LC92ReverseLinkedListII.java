@@ -17,7 +17,7 @@ public class LC92ReverseLinkedListII extends BasicTemplate {
 
     /**
      * https://leetcode.com/problems/reverse-linked-list-ii/discuss/30666/Simple-Java-solution-with-clear-explanation
-     * 還是沒有想到正確該怎麼解, 答案的第各回應比較簡單明瞭, 我是自己紙筆照著畫一遍才知道在幹嘛
+     * 還是沒有想到正確該怎麼解, 答案的第一個回應比較簡單明瞭, 我是自己紙筆照著畫一遍才知道在幹嘛
      * 1. 先建立一個 dummy, dummy.next = head, 之後的 pointer都會變動, 只有dummy不會動 最後回傳 dummy.next
      * 2. 先給 ListNode pre = dummy; ListNode cur = dummy.next(head); int i = 1;
      * -> 因為一開始cur = head(dummy.next), 所以cur 已經往前走一步了, 所以 int i 一開始要給1

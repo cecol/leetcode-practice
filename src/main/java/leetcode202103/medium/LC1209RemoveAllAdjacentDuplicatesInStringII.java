@@ -67,7 +67,8 @@ public class LC1209RemoveAllAdjacentDuplicatesInStringII extends BasicTemplate {
         for (char c : s.toCharArray()) {
             sb.append(c);
             int last = sb.length() - 1;
-            count[last] = 1 + (last > 0 && sb.charAt(last) == sb.charAt(last - 1) ? count[last - 1] : 0);
+            if (last > 0 && sb.charAt(last) == sb.charAt(last - 1)) count[last] = count[last - 1] + 1;
+            else count[last] = 1;
             if (count[last] >= k) sb.delete(sb.length() - k, sb.length());
         }
         return sb.toString();

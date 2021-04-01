@@ -21,15 +21,15 @@ public class LC986IntervalListIntersections extends BasicTemplate {
     public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
         if (firstList == null || firstList.length == 0 || secondList == null || secondList.length == 0)
             return new int[][]{};
-        int fi = 0, si = 0, startMax, endMin;
+        int fi = 0, si = 0, lastBegin, earlyEnd;
         List<int[]> res = new ArrayList<>();
 
         while (fi < firstList.length && si < secondList.length) {
-            startMax = Math.max(firstList[fi][0], secondList[si][0]);
-            endMin = Math.min(firstList[fi][1], secondList[si][1]);
-            if (endMin - startMax >= 0) res.add(new int[]{startMax, endMin});
-            if (firstList[fi][1] == endMin) fi++;
-            if (secondList[si][1] == endMin) si++;
+            lastBegin = Math.max(firstList[fi][0], secondList[si][0]);
+            earlyEnd = Math.min(firstList[fi][1], secondList[si][1]);
+            if (earlyEnd - lastBegin >= 0) res.add(new int[]{lastBegin, earlyEnd});
+            if (firstList[fi][1] == earlyEnd) fi++;
+            if (secondList[si][1] == earlyEnd) si++;
         }
         return res.toArray(new int[res.size()][2]);
     }

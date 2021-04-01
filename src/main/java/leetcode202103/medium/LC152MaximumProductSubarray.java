@@ -23,7 +23,7 @@ public class LC152MaximumProductSubarray extends BasicTemplate {
      * 如果遇到當前 nums[i] 是負數, 代表 min/max互換
      * -> imax = Math.max(nums[i], imax * nums[i]);
      * -> imin = Math.min(nums[i], imin * nums[i]);
-     * 這邊在說的, 目前的a[i] 累計的 max/min 要馬是他自己(所以是從心累計)或者是原本的再繼續累計
+     * 這邊在說的, 目前的a[i] 累計的 max/min 要馬是他自己(所以是從新累計)或者是原本的再繼續累計
      * 為什麼？ 因為如果全部都是負數, 那最後結果的 max 應該是最大的負數
      */
     public int maxProduct(int[] nums) {

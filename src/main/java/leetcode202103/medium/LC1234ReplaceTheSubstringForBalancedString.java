@@ -25,7 +25,7 @@ public class LC1234ReplaceTheSubstringForBalancedString extends BasicTemplate {
 
     /**
      * https://leetcode.com/problems/replace-the-substring-for-balanced-string/submissions/
-     * 結果這題lee的解法沒看懂, 反而令個解釋比較易懂
+     * 結果這題lee的解法沒看懂, 反而另一個解釋比較易懂
      * 這題不能直接用sliding window 來解 -> 要先計算總數, 才知道多出來的字元
      * -> 這樣才知道 sliding window 內要的計算條件就是包含到多出來的字元的多出來數目 -> 透過一層轉換來計算 sliding window的概念題目
      * 因為要換的是 substring -> 要換就換一串, 不能個別換 -> 要換的對象就是sliding window
