@@ -29,6 +29,27 @@ public class LC518CoinChange2 extends BasicTemplate {
         return x[coins.length - 1][amount];
     }
 
+    /**
+     * https://leetcode.com/problems/coin-change-2/discuss/176706/Beginner-Mistake%3A-Why-an-inner-loop-for-coins-doensn't-work-Java-Soln
+     * 這篇有解釋為什麼這個解法的邏輯 coin loop outer, amount inner
+     * 相較於 amount outer loop, coin inner loop
+     * coin loop outer, amount inner 其實是原本的 dp[coin][amount] 的縮減版
+     * 原版的 dp[i][j] 是指 number of ways to get sum 'j' using 'first i' coins
+     * 第 i 個coin 針對每個 amount j 都是第一次使用 -> 所以才沒有重複計算的問題 因為那個 coin i 只有被使用一次(在當時的 amount j)
+     * 然後縮減成 1 維陣列 dp[amount] 時候 是使用前面 'previous /first i coins'
+     * 所以只要一維 dp[amount]
+     * 因為每換一次 coin, 就把前面 coins 累加上來
+     * coin loop outer 就代表 coin 只有被使用一次(對每個 amount j)
+     *
+     * coin loop outer, amount inner 是本來的 dp[coin][amount] 就是先走 coin 外層 再走每一個 amount
+     *
+     * 這題還有個關鍵 他是背包問題的 但是該 coin 可以拿多次
+     *
+     * coin loop outer, amount inner 是這題自己的dp語意的結果
+     * 相較於 amount outer loop, coin inner loop -> dp語意不一樣
+     * -> 這dp是指 組成amount j , 可以由過去任何 amount j-coin 組合回來(但有些組合是重複的也納入計算)
+     * -> 兩者dp是不一樣的邏輯
+     * */
     public int fastest(int amount, int[] coins) {
         int arr[] = new int[amount + 1];
         Arrays.fill(arr, 0);
