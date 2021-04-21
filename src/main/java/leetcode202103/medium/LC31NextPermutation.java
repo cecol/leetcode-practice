@@ -5,6 +5,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.list.ListNode;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class LC31NextPermutation extends BasicTemplate {
     public static void main(String[] args) {
         Logger log = LoggerFactory.getLogger("Main");
@@ -27,6 +31,7 @@ public class LC31NextPermutation extends BasicTemplate {
      * -> we just have to reversely sort the num[i,n-1]
      * */
     public void nextPermutation(int[] nums) {
+        "".split("", 1);
         if (nums == null || nums.length <= 1) return;
         int i = nums.length - 2;
         while (i >= 0 && nums[i] >= nums[i + 1]) i--;

@@ -46,11 +46,11 @@ public class LC420StrongPasswordChecker extends BasicTemplate {
      * 所以拿deleteCount換replace都是划算
      * <p>
      * ex: for repeated aaaaaaaa -> 7a
-     * 算出來的 replace = 3, onced = 0, twod = 2
-     * 其中可分解為 3組 repeated: 1:aaa 2:aaaa
+     * 算出來的 replace = 2, onced = 0, twod = 2
+     * 其中可分解為 2組 repeated: 1:aaa 2:aaaa
      * replace -= Math.Min(deleteCount, oned); -> 因為該組的 %3 != 0, onced = 0, 所以這邊沒減去
      * replace -= Math.Min(Math.Max(deleteCount - oned, 0), twod) / 2; 因為該組的 %3 == 1, twod = 2, 先減去第2組 2:aaaa -> 只要刪掉2個變成aa就合法, 所以replace:delete比值 1:2
-     * replace -= Math.Max(deleteCount - oned - twod, 0) / 3; -> 拿剩下的deleteCount再去減去 1:aaa ((同上組
+     * replace -= Math.Max(deleteCount - oned - twod, 0) / 3; -> 拿剩下的deleteCount再去減去 1:aaaa ((同上組
      * <p>
      * int oned = 0; // total deletions for 3n repeated chars. e.g. "aaa" needs 1 deletion to fix
      * int twod = 0; // total deletions for 3n+1 repeated chars. e.g. "aaaa" needs 2 deletions to fix.

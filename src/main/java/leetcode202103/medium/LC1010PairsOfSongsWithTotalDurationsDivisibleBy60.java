@@ -22,10 +22,10 @@ public class LC1010PairsOfSongsWithTotalDurationsDivisibleBy60 extends BasicTemp
      * https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/discuss/256738/JavaC%2B%2BPython-Two-Sum-with-K-60
      * 基本上 time % 60 就是 two sum的概念
      * how many x satisfy (t + x) % 60 = 0.
-     * The straight forward idea is to take x % 60 = 60 - t % 60,
+     * The straight forward idea is to take x % 60 == 60 - t % 60,
      * But if t % 60 = 0, x % 60 = 0 instead of 60.
-     * One solution is to use x % 60 = (60 - t % 60) % 60,
-     * the other idea is to use x % 60 = (600 - t) % 60.
+     * One solution is to use x % 60 == (60 - t % 60) % 60,
+     * the other idea is to use x % 60 == (600 - t) % 60.
      * 為了處理0的 case -> slots[(600 - t) % 60] 就是最直接的辦法
      */
     public int numPairsDivisibleBy60(int[] time) {

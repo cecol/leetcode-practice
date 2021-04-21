@@ -29,10 +29,12 @@ public class LC1192CriticalConnectionsInANetwork extends BasicTemplate {
      * 1. v is not u parent(避免往回走, 因為是 undirected graph)
      * 2. 如果v 未拜訪, unvisited -> dfs v
      * 3. 確認v拜訪之後, update low[u] = Math.min(low[v], low[u]);
-     * -> 因為low[u] 是當前 seqID, 但可能 low[v]更小, 更新完確保strong connected graph, 他們的 low 都會是同一個最小
+     * -> 因為low[u] 是當前 seqID, 但可能 low[v]更小(之前有走過, 代表有聯通點, 聯通點之間取最小low為共識), 更新完確保strong connected graph, 他們的 low 都會是同一個最小
      * 4. 檢查if (low[v] > timestamp[u]) -> 確認是否是bridge
-     * -> 因為 u 有壓一個 timestamp[u] 拜訪時機點, 如果low[v]的strong connected graph的low大於 timestamp[u] 拜訪時機點
+     * -> 因為 u 有押一個 timestamp[u] 拜訪時機點, 如果low[v]的strong connected graph的low大於 timestamp[u] 拜訪時機點
      * -> 代表是分開的強連同通圖, 剛好走在 bridge 上面 -> 所以就是要找的 articulation point
+     * -> 同一批strong connected graph, low會一致, 但timestamp還是遞增, 因此當前 strong connected graph走完, low都會是最低值
+     * -> 因此遇到 low[v] > timestamp[u], 就是說當前在檢查的 adj v, 是在另一批strong connected graph
      * */
     public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
         int[] timestamp = new int[n];

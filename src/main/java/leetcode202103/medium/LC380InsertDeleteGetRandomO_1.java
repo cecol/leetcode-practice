@@ -64,8 +64,6 @@ public class LC380InsertDeleteGetRandomO_1 extends BasicTemplate {
      * Get a random element from the set.
      */
     public int getRandom() {
-        int min = 0;
-        int max = res.size();
-        return res.get((int) (Math.random() * (max - min) + min));
+        return res.get((int) (Math.random() * res.size()));
     }
 }

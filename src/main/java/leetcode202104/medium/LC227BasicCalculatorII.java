@@ -25,6 +25,7 @@ public class LC227BasicCalculatorII extends BasicTemplate {
         if (len == 0) return 0;
         Stack<Integer> sk = new Stack<>();
         int num = 0;
+
         char preSign = '+';
         for (int i = 0; i < len; i++) {
             if (Character.isDigit(s.charAt(i))) {

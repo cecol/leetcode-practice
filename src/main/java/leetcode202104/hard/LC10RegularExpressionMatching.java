@@ -12,6 +12,7 @@ public class LC10RegularExpressionMatching extends BasicTemplate {
     public static void main(String[] args) {
         Logger log = LoggerFactory.getLogger("Main");
         var LC = new LC10RegularExpressionMatching();
+        LC.isMatch("aaaaa", "a*");
     }
 
     /**
@@ -23,6 +24,7 @@ public class LC10RegularExpressionMatching extends BasicTemplate {
      * -> 所以p 長得像 #*#*#*#* -> #* 代表第一個就match不到 s所有字元(s只有小寫組成, 所以只要match到小寫以外的)
      * -> for (int j = 2; j <= pn; j++) if (pc[j - 1] == '*') dp[0][j] |= dp[0][j - 2];
      * -> 從第j=2開始檢查, 如果 p[j-1] 是 '*' 且前面 j-2 之前比對就是 true(也是空白字串) dp[0][j] |= dp[0][j - 2];
+     * -> 代表當前的 p[j-1] 是 '*' 當作 0 match case -> 可以當作空字串, 所以直接繼承 dp[0][j-2] 的結果
      * -> 這會從 dp[0][0] = true(第一個就是空字串), 往後延伸到某一格 p[j-1] 不是 *
      * <p>
      * if (pc[j] == '.' || pc[j] == sc[i]) dp[i][j] = dp[i-1][j-1] 當前字元一樣 -> 就是回推前一個字元的比對 或者 p[j] = . 就是隨意比對
@@ -36,7 +38,10 @@ public class LC10RegularExpressionMatching extends BasicTemplate {
      * -> dp[i][j - 2] -> 無視 p[j] 是 * 的整個 pattern 就是當作 0 match
      * -> dp[i - 1][j - 1] -> 有拿p[j] * 的pattern -> 1 match -> 當前j有中 -> 所以回頭看看 i-1, j-2 的情況
      * -> dp[i - 1][j] -> 有拿p[j] * 的pattern -> many match -> 當前j有中 -> 就是拿 i-1 match到j 的結果來用
-     * -> (因為i-1也是可以往後match到j 如果當時計算時候有算到)
+     * ->   這部分我沒有很理解, 目前理解方式就是, 如果 s(i-1) char == s(i) char, ex: P: a*, S: aaaaa
+     * ->   那dp[i-1][j]就會是 true, 因為j是 *, 重複多個可以納入
+     * ->   如果 s(i-1) char != s(i) char, 那dp[i-1][j]就會是 false, 那也不影響當前的 dp[i][j]
+     * -> (因為i-1也是可以往後match到j 如果當時計算時候有算到 true)
      */
     public boolean isMatch(String s, String p) {
         int m = s.length(), n = p.length();
@@ -55,6 +60,7 @@ public class LC10RegularExpressionMatching extends BasicTemplate {
                 }
             }
         }
+        logBooleanArray(dp);
         return dp[m][n];
     }
 }
