@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LC152MaximumProductSubarray extends BasicTemplate {
@@ -12,6 +13,7 @@ public class LC152MaximumProductSubarray extends BasicTemplate {
     public static void main(String[] args) {
         Logger log = LoggerFactory.getLogger("Main");
         var LC = new LC152MaximumProductSubarray();
+        LC.maxProduct(new int[]{1});
     }
 
     /**

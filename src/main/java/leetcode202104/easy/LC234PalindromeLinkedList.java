@@ -26,6 +26,7 @@ public class LC234PalindromeLinkedList extends BasicTemplate {
      * 跟標題宣稱的不一樣
      * */
     public boolean isPalindrome(ListNode head) {
+        if(head == null || head.next == null) return true;
         ListNode s = head, f = head;
         while (f.next != null && f.next.next != null) {
             s = s.next;

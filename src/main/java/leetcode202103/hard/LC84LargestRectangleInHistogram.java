@@ -22,7 +22,17 @@ public class LC84LargestRectangleInHistogram extends BasicTemplate {
      * -> 而pop出來的這個要兌現的
      * -> 1. 如果 stack 還有(!q.isEmpty()), 也一定比當前要兌現的小
      * ->   因此能兌現的寬度就是  i - q.getLast() + 1
-     * -> 2. 如果 stack 沒有等於他是最矮的 -> 因此寬度是目前走到的 i
+     * -> int realizeHWidth = i - (q.isEmpty() ? 0 : q.getLast() + 1);
+     * -> 為什麼寬度是 i 減去 q.getLast() + 1?
+     * -> 因為是遞增, 所以當前拿出來的 realizeH = heights[q.pollLast()];
+     * -> 他只能往後看算到 i - 1, 往前都比他小(因為遞增stack中的都比他小, 自然無法往更前面來算面積)
+     * -> 所以可以算得 width 是 i - (q.getLast() + 1)
+     * -> 如果 stack is empty -> 等於前面沒有比他更小, 等於說整個都可以計算
+     * -> 這其實就是 heights = [2,1,5,6,2,3] 中, 當i 走到n, stack 會是存 1,4,5 offset, 相對應就是height: 1,2,3
+     * -> 這時候0 會強迫把 1,2,3 pop出來算面積, 最後pop到1, 1就會是貫通的, 因為他最矮, 自然可全寬度全算
+     * -> 會算到 q.isEmpty() ? 0 in (int realizeHWidth = i - (q.isEmpty() ? 0 : q.getLast() + 1);)
+     * -> 1. 要嘛是最矮的 這樣 width就是會是 n -> 唯一一個可以留到 i == n 並且算 height * n的
+     * -> 2. 要嘛是最矮的 前面的height這樣, width就是會是當時走到的i來算(因為不是最矮, 所以只能貫通到頭, 不能到n)
      * 3. 最後一點  for (int i = 0; i <= n; i++) 其中讓 i 走到 n 是因為要配合 int v = i == n ? 0 : heights[i];
      * 等於說若一直遞增, 就會沒有發生兌現, 所以, 得帶入一個最小高度0 -> 算是最後收尾把還沒兌現的高度都兌現了
      */
