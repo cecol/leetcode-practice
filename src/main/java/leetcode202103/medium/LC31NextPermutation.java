@@ -29,9 +29,15 @@ public class LC31NextPermutation extends BasicTemplate {
      * 3. 最後要reverse [i, n-1] -> 因為他們是遞減, 所以reverse後就變成最小, 那你當前的這一個就是 lexicographically next greater
      * -> The last step is to make the remaining higher position part as small as possible,
      * -> we just have to reversely sort the num[i,n-1]
+     *
+     * 重點整理
+     * 1. 要先找第一組遞減, i 從 n-2 開始找跟 i+1比較, while (i >= 0 && nums[i] >= nums[i + 1]) i--;
+     * -> 這樣 i 就是要兌換的位置
+     * 2. 如果 i >= 0 代表有找到, 反之沒找到, 直接 rev
+     * -> 有找到就是 j=n-1 開始找, 找到第一個 nums[j] > nums[i]
+     * 3. 最後都是 rev(nums, i+1, n-1);
      * */
     public void nextPermutation(int[] nums) {
-        "".split("", 1);
         if (nums == null || nums.length <= 1) return;
         int i = nums.length - 2;
         while (i >= 0 && nums[i] >= nums[i + 1]) i--;

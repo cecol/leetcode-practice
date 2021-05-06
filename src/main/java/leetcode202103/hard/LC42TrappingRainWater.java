@@ -28,6 +28,8 @@ public class LC42TrappingRainWater extends BasicTemplate {
      * -> -> 所以可以積水的就是  water += leftMax - height[left]; height[left] 是地面, 地面跟 leftMax的高度差就是可以積水的總量
      * 所以就此類推下去
      * 每次 left or right 內縮都會檢查並更新 leftMax & rightMax, 並且跟網內縮的 left & right過對比較看看內縮一格是否能積水
+     * 注意！！ while (left <= right) 這才是對的
+     * while (left < right) 是錯的 -> 因為會少算一次可積水的狀況
      * */
     public int trap(int[] height) {
         if (height.length < 3) return 0;

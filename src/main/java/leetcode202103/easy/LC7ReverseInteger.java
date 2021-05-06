@@ -22,6 +22,11 @@ public class LC7ReverseInteger extends BasicTemplate {
      * 2. int newRes = res * 10 + tail;
      * -> 但先用一個 newRes 紀錄前一次結果加上新的尾數, 如果 newRes 算回去不等於前一次結果 res -> overflow (因為是從尾巴加過去, 所以overflow後就是負數)
      * 3. 如果沒有 overflow -> x/=10; 刪掉最後一個, 繼續下一圈直到 x == 0
+     *
+     * 關鍵思考
+     * 1. 不用去想正負值處理 -> 不用去想 Math.abs
+     * 2. 直接取出當前 x 的尾數放到目前已計算的
+     * 3. 翻計算回去看直是否一樣, 不一樣就是發生 overflow
      */
     public int reverse(int x) {
         int res = 0;

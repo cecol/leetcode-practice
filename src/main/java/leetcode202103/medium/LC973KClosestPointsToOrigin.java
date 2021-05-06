@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import util.list.ListNode;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.PriorityQueue;
 
 public class LC973KClosestPointsToOrigin extends BasicTemplate {

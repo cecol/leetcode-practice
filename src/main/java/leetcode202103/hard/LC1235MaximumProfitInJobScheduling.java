@@ -33,6 +33,13 @@ public class LC1235MaximumProfitInJobScheduling extends BasicTemplate {
      * -> 沒做就是 dp.lastEntry() -> last end time -> 最近一次的profit
      * -> 就複寫上去
      * 所以 dp.lastEntry() 都是目前的最佳 profit
+     *
+     * 觀念重點
+     * 1. 不要用 dp[job number][time] 來解, 給的 time 範圍太大, dp array 會超過 memory -> 一定用 TreeMap
+     * 2. 把 int[] startTime, int[] endTime, int[] profit 集合成一個 job[n][3] -> 然後 sort by end time
+     * 3. 因為 sort by end time, 所一個一個從頭到尾job 加入 TreeMap 都會造成 TreeMap key 往新的長,
+     * -> 但是只有當前 job 加入有造成 profit對大化才加入 , 所以邏輯是 if (cur > dp.lastEntry().getValue()) dp.put(j[1], cur);
+     * -> 不然 dp.lastEntry() 都是保留目前的最大 profit
      */
     public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
         int n = startTime.length;
