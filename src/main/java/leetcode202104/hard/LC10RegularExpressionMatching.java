@@ -32,11 +32,12 @@ public class LC10RegularExpressionMatching extends BasicTemplate {
      * -> 原意應該是 dp[i][j] = dp[i-1][j-1] && true
      * else if p[j] == '*' 代表要往回推 pattern
      * -> if (pc[j - 1] != sc[i] && pc[j-1] != '.') dp[i][j] = dp[i][j - 2]; -> 前一個字沒比對到 且也非 '.',
+     * -> j-1 是 preP, preP 也沒中, 只好回溯到 j-2
      * -> 等於說該 pc[j] 是 '*' 的 pattern 整個都沒比對到, 當作 0 match 跳過, 所以拿 dp[i][j-2] 的情況
      * -> else dp[i][j] = (dp[i][j - 2] || dp[i - 1][j - 1] || dp[i - 1][j]);
      * -> 有比對前一字元 or 是 '.'(可以中任意字元) -> 有很多選項都可以取(全部 or 起來)
      * -> dp[i][j - 2] -> 無視 p[j] 是 * 的整個 pattern 就是當作 0 match
-     * -> dp[i - 1][j - 1] -> 有拿p[j] * 的pattern -> 1 match -> 當前j有中 -> 所以回頭看看 i-1, j-2 的情況
+     * -> dp[i - 1][j - 2] -> 有拿p[j] * 的pattern -> 1 match -> 當前j有中 -> 所以回頭看看 i-1, j-2 的情況
      * -> dp[i - 1][j] -> 有拿p[j] * 的pattern -> many match -> 當前j有中 -> 就是拿 i-1 match到j 的結果來用
      * ->   這部分我沒有很理解, 目前理解方式就是, 如果 s(i-1) char == s(i) char, ex: P: a*, S: aaaaa
      * ->   那dp[i-1][j]就會是 true, 因為j是 *, 重複多個可以納入

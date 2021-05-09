@@ -28,6 +28,16 @@ public class LC1152AnalyzeUserWebsiteVisitPattern extends BasicTemplate {
      *
      * 所以有幾個重點 user 看過 a,b,c -> 組出來的 sequences 3 可能有 a,b,c or b,a,c 各種排列組合
      * -> 因為不同時間看的所產生不同排列組合 -> 所以這些都要記下來且count by users -> 最後可能就是由字串比對lexicographically 來決勝負
+     *
+     * 題意釐清 - 第三次來解還是沒理解, 再次思考來做紀錄
+     * A 3-sequence is a list of websites of length 3 sorted in ascending order by the time of their visits.  (The websites in a 3-sequence are not necessarily distinct.)
+     * Find the 3-sequence visited by the largest number of users.
+     * 是指說(web1, web2, web3) 要被一個人看過, 因為要count 這個組合的人頭
+     * (我每次都想成是 (web1 visited by u1, web2 visited by u2, web3 visited by u3) 但這樣組合根本是無窮盡)
+     * 3-sequence visited by the largest number of users. 關鍵是這句, 所以應該要先看每個 user 看了哪些 web,
+     * 所以該user 至少要看過 3個以上web 才能組出他看過所有 web的可能性 -> 然後找不同user 間的 (web1, web2, web3) overlap count
+     * 而且 3 sorted in ascending order -> 這個 web組合得是 依照時間順序
+     * 所以必然得 sort
      */
     class Visit {
         String n;

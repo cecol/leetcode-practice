@@ -32,6 +32,23 @@ public class LC253MeetingRoomsII extends BasicTemplate {
      * starts[i]>=ends[endsItr] 代表的是前面的會議室end time已經有空缺出來, 可以給當前的 starts[i]用, 看下一個end time
      * 其實每次的  endsItr++; 可以視為有一間房間空缺出來, 所以當下 room 不必 ++
      * 而每次的 i++ 都是要個會議室
+     *
+     * 我其實一直對於為什麼 start, end 可以分開來 sort 很不能理解, 儘管解過很多次了
+     * 但後來看到新的解釋好像有比較進入狀況
+     * 1. What the algorithm is doing is checking how many meetings begin before the earliest-ended meeting ends.
+     * -> If, for instance, 3 meetings have started before the earliest possible meeting end, than we need 3 rooms.
+     * -> 就是這個演算法檢查的是, 在最早結束的meeting 之前有多少個 meet begin -> 就是要開多少room, 所以才要排序
+     * 2. Sorting the arrays helps in two things: first of all you can easily get the earliest meetings end time,
+     * -> and secondly, it allows you to start looking for meetings ends only from next element in the ends array
+     * -> when you find some meeting start that is after the current end,
+     * -> because all other meeting ends before the current in the sorted array will also be before the current meeting start.
+     * -> So you just have to run 1 time over each array.
+     * -> 1. 排序要幫助的就是, 先拿到在最早結束的meeting 之前有多少個 meet begin
+     * -> 2. 當meeting begin > current meet end -> 代表meeting begin 也大於其他更前面的 meet end
+     * -> 所以再往下找下個 end 來找出是否是有 start < end 導致還要 + room
+     * 我覺得這個演算法好像只能應用在這題, 且他有個重點: end不一定要走完, 因為演算法是要看有多少 start < end 來決定開房間
+     * start走完了就是答案
+     *
      * */
     public int minMeetingRoomsHeapFastest(int[][] intervals) {
         int[] starts = new int[intervals.length];
