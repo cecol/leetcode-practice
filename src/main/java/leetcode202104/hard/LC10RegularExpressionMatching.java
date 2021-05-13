@@ -43,6 +43,25 @@ public class LC10RegularExpressionMatching extends BasicTemplate {
      * ->   那dp[i-1][j]就會是 true, 因為j是 *, 重複多個可以納入
      * ->   如果 s(i-1) char != s(i) char, 那dp[i-1][j]就會是 false, 那也不影響當前的 dp[i][j]
      * -> (因為i-1也是可以往後match到j 如果當時計算時候有算到 true)
+     *
+     * 再次回來釐清 為什麼 if (preCurP != '.' && preCurP != curS) dp[i][j] = dp[i][j - 2]; 都沒中時候是 j-2?
+     * -> 因為 #####a(i)
+     * ->     ####b*(j) -> a(i) 沒中* 也沒中 b(j-1), 只好退到 j-2, dp[i][j] = dp[i][j - 2];
+     * -> 所以把 *(j), b(j-1) 當成空氣來比對, 所以直接拿 dp[i][j-2]
+     * -> 不能想成把 a(i) 當成空氣, 因為 s是要比對字串, 不能被當成空氣, 能被當成空氣的只有 p的 *(j) 與 b(j-1)
+     * -> 有中的時候
+     * -> ######a(i)
+     * -> ####a*(j) -> a(i) 沒中*(j) 但有中 a(j-1), 自然可以 dp[i][j] = dp[i-1][j];
+     * -> a(i) 有中, 也可能 #(i-1) 當時也比對到 j, 所以也拿來用 many match
+     * -> many match 意思就是 i中, i-1 有中, 如果 i-1 沒中, 這時候拿到就是 false, 就不是 many match
+     * 或者
+     * -> ####a*(j) -> a(i) 沒中*(j) 但有中 a(j-1), 自然可以 dp[i][j] = dp[i-1][j-2];
+     * -> 直接 a(i) 中了 a(j-1), 但也要跟前面 (i-1) 串連
+     * -> 因為 j-1 被當前 i 拿去比對了, 所以前面的 i-1 只可以比對 j-2
+     * 所以更簡化的是, 既然拿 preCurP, preCurP 就是 j-1 狀態, 如果 s != preCurP, 自然只能繼承 j-2
+     * 如果 s == preCurP -> 那就是 當前 i 比對到 j-1, 所以可以拿
+     * dp[i-1][j-2], i 當成比對到 j-1, 所以串連前面結果 i-1, j-2
+     * dp[i][j-2], j, j-1 都當成空氣
      */
     public boolean isMatch(String s, String p) {
         int m = s.length(), n = p.length();
