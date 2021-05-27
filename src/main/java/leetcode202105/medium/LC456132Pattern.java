@@ -51,7 +51,7 @@ public class LC456132Pattern extends BasicTemplate {
     public boolean find132pattern(int[] nums) {
         Stack<Integer> sk = new Stack<Integer>();
         int second = Integer.MIN_VALUE;
-        for(int i=nums.length-1;i>=0;i++) {
+        for(int i=nums.length-1;i>=0;i--) {
             if(nums[i] < second) return true;
             while(sk.size() > 0 && sk.peek() < nums[i]) second = sk.pop();
             sk.push(nums[i]);
@@ -62,6 +62,7 @@ public class LC456132Pattern extends BasicTemplate {
     /**
      * 連O(n^2) 其實可以很直觀, 重點就是固定中間點 j, 然後記憶 j 左邊的min,
      * 第二層迴圈去找 j 左邊的有出現 nums[k] < nums[j] && nums[k] > min
+     * 後來 O(n^2) 會 TLE -> 應該標準解要 O(n)
      * */
     public boolean find132patternOn2(int[] nums) {
         for (int j = 0, min = Integer.MAX_VALUE; j < nums.length - 1; j++) {

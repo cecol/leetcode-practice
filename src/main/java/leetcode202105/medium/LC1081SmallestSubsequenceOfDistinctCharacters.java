@@ -54,6 +54,6 @@ public class LC1081SmallestSubsequenceOfDistinctCharacters extends BasicTemplate
         }
         StringBuilder sb = new StringBuilder();
         for(Character c:sk) sb.append(c);
-        return sb.reverse().toString();
+        return sb.toString();
     }
 }

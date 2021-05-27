@@ -42,27 +42,41 @@ public class LC1335MinimumDifficultyOfAJobSchedule extends BasicTemplate {
      * -> 所以k 要帶下去的時候要多-1 才會是 offset, 畢竟k就是用來算 i-1 day的 job offset -> 所以 k to i-1 th job 會變成 k >= i - 2
      * 4. maxJobDiffFromK2J = Math.max(maxJobDiffFromK2J, jobDifficulty[k + 1]); -> 因為k是屬於i-1 day的範圍, k+1才是i day範圍
      * -> 而maxJobDiffFromK2J是記載i day的 max, 不是 i-1 day
+     * <p>
+     * 後來在寫的更精簡, 至少offset比較直覺
+     * dp就直接用 new int[d][n]; 所以存取的時候要 d-1, n-1, 其他的就照 offset 從1開始算
+     * getDiff(dp, jobDifficulty, d, n, oneDayMax);
+     * 就是計算第 d day 做完 n jobs 結果
+     * if (dp[d - 1][n - 1] != 0) return dp[d - 1][n - 1]; 有結果就回傳
+     * if (d == 1) return oneDayMax[n - 1]; -> 全部只有一天, 就回傳該天的 max difficulty
+     * int min = Integer.MAX_VALUE;
+     * int curMaxJ = jobs[n - 1]; d day 先從只有最後一個 n job可以用, d day max 就是 jobs[n - 1]
+     * for (int k = n; k > d - 1; k--) { -> d day 從 k = n 到 d 可用(畢竟 d-1個jobs 要給前面的d-1 day用, 每天至少一個)
+     * -> curMaxJ = Math.max(curMaxJ, jobs[k - 1]);
+     * -> int diff = curMaxJ + getDiff(dp, jobs, d - 1, k - 1, oneDayMax); -> d-1 day for 剩下的 k-1 job下去遞迴
+     * -> min = Math.min(min, diff);
+     * }
      */
     public int minDifficulty(int[] jobDifficulty, int d) {
         int n = jobDifficulty.length;
-        if (n < d) return -1;
-        Integer[][] dp = new Integer[d + 1][n];
-        int[] maxSoFar = new int[n];
-        maxSoFar[0] = jobDifficulty[0];
-        for (int i = 1; i < n; i++) maxSoFar[i] = Math.max(maxSoFar[i - 1], jobDifficulty[i]);
-        return topDown(dp, maxSoFar, jobDifficulty, d, n - 1);
+        if (d > n) return -1;
+        int[][] dp = new int[d][n];
+        int[] oneDayMax = new int[n];
+        for (int i = 0; i < n; i++) oneDayMax[i] = Math.max(jobDifficulty[i], i > 0 ? oneDayMax[i - 1] : 0);
+        return getDiff(dp, jobDifficulty, d, n, oneDayMax);
     }
 
-    private int topDown(Integer[][] dp, int[] maxSoFar, int[] jobDifficulty, int i, int j) {
-        if (i > j + 1) return -1;
-        else if (i == 1) return maxSoFar[j];
-        else if (dp[i][j] != null) return dp[i][j];
-        dp[i][j] = Integer.MAX_VALUE;
-        int maxJobDiffFromK2J = jobDifficulty[j];
-        for (int k = j - 1; k >= i - 2; k--) {
-            maxJobDiffFromK2J = Math.max(maxJobDiffFromK2J, jobDifficulty[k + 1]);
-            dp[i][j] = Math.min(dp[i][j], maxJobDiffFromK2J + topDown(dp, maxSoFar, jobDifficulty, i - 1, k));
+    private int getDiff(int[][] dp, int[] jobs, int d, int n, int[] oneDayMax) {
+        if (dp[d - 1][n - 1] != 0) return dp[d - 1][n - 1];
+        if (d == 1) return oneDayMax[n - 1];
+        int min = Integer.MAX_VALUE;
+        int curMaxJ = jobs[n - 1];
+        for (int k = n; k > d - 1; k--) {
+            curMaxJ = Math.max(curMaxJ, jobs[k - 1]);
+            int diff = curMaxJ + getDiff(dp, jobs, d - 1, k - 1, oneDayMax);
+            min = Math.min(min, diff);
         }
-        return dp[i][j];
+        dp[d - 1][n - 1] = min;
+        return min;
     }
 }
