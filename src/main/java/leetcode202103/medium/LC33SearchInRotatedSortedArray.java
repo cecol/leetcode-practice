@@ -40,9 +40,9 @@ public class LC33SearchInRotatedSortedArray extends BasicTemplate {
      * 2. 重點
      * 因為是 while(l<r) 且最後是回傳return nums[l] == target ? l : -1;
      * 所以l移動是要精確的, 所以內層判定
-     * 在同一邊要用: if (target > nums[m]) l = m + 1;
+     * 在同一邊要用: if (target > nums[m]) l = m + 1; -> 同邊就是一般 binarysearch
      * 不能用 : if (target < nums[m]) r = m - 1; 邏輯上是對的, 但最後答案會變成放在 r
-     * 在不同邊要用: if (target < nums[0]) l = m + 1;
+     * 在不同邊要用: if (target < nums[0]) l = m + 1; -> 不同邊就是先縮到同邊
      * 不能用 if (target > nums[0]) r = m - 1; 邏輯上是對的, 但最後答案會變成放在 r
      * 因為拿來比對的那一邊*(l or r) 就是界定邊界, 既然答案最後用l, 那經確界定要用l來界定, 所謂的精確界定就是沒有 等於的比較
      */
