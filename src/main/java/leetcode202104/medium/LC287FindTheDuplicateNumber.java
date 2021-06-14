@@ -23,6 +23,25 @@ public class LC287FindTheDuplicateNumber extends BasicTemplate {
      * 這是蠻有趣的
      * */
     public int findDuplicate(int[] nums) {
+        int n = nums.length;
+        if(n > 1){
+            int slow = nums[0];
+            int fast = nums[nums[0]];
+            while(slow != fast) {
+                slow = nums[slow];
+                fast = nums[nums[fast]];
+            }
+            fast = 0;
+            while(fast != slow) {
+                fast=nums[fast];
+                slow=nums[slow];
+            }
+            return slow;
+        }
+        return -1;
+    }
+
+    public int findDuplicateOld(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
             while (nums[i] != i + 1 && nums[nums[i] - 1] != nums[i]) {
                 swap(nums, i, nums[i] - 1);
