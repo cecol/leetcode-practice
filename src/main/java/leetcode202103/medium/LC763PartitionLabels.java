@@ -37,7 +37,7 @@ public class LC763PartitionLabels extends BasicTemplate {
         for (int i = 0; i < S.length(); i++) {
             last = Math.max(last, m[S.charAt(i) - 'a']);
             if (last == i) {
-                res.add(last - start - 1);
+                res.add(last - start + 1);
                 start = last + 1;
             }
         }
