@@ -43,7 +43,7 @@ public class LC4MedianOfTwoSortedArrays extends BasicTemplate {
      * 4. 下一次往下走的k 會變成 k - k/2,  不能直接用 k/2, 因為可能有 1 的誤差
      * -> 回到步驟2 -> 檢查是否 k 降為 1, 如果下一次直接用 k/2, 那麼k可能就變成0, 就要用不一樣的理解方式了
      * -> 因為k 可能是 odd/even -> 所以必然用 k - k/2 確保不會漏掉餘數 1 的 case
-     * 5. n1s + k2/ - 1, 因為 n1s是 0 based offset, k 是1 base steps, 所以得 -1 才能是真正的 offset
+     * 5. n1s + k/2 - 1, 因為 n1s是 0 based offset, k 是1 base steps, 所以得 -1 才能是真正的 offset
      */
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int m = nums1.length, n = nums2.length;

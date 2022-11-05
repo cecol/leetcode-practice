@@ -23,7 +23,7 @@ public class LC525ContiguousArray extends BasicTemplate {
      * zero < 0 means we have more ones than zeros
      * zero == 0 means we have equal number of ones and zeros -> 當 zero == 0, index: 0 到 i 目前為止都是 balance
      * 如果 i 時候 zero == 1, 若更後面的 j 之累計zero == 1, 代表 i->j 之間 0,1 是 balance (zero 一直保持平衡都是1)
-     * -> 所以要用HashMap 記載 前面出現過的 zero 是多少的 case -> 讓後面的 j 如果遇到一樣的就可以計數balance
+     * -> 所以要用HashMap 記載 [第一次]前面出現過的 zero 是多少的 case -> 讓後面的 j 如果遇到一樣的就可以計數balance
      */
     public int findMaxLength(int[] nums) {
         Map<Integer, Integer> m = new HashMap<>();

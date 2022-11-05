@@ -21,6 +21,10 @@ public class LC287FindTheDuplicateNumber extends BasicTemplate {
      * 還有 linked list , fast/slow 解法 https://leetcode.com/problems/find-the-duplicate-number/discuss/72846/My-easy-understood-solution-with-O(n)-time-and-O(1)-space-without-modifying-the-array.-With-clear-explanation.
      * 很像 linked list 找cycle 解法, 先fast 走到跟 slow依樣 -> 然後start在走到 slow 就是 結果
      * 這是蠻有趣的
+     *
+     * 2022/11/2 這題就是要考 Floyd circle detection algorithm, 原本題意沒有給限制, 後來加上限制就是為了提示你要考這個
+     * 所以唯一正宗解法只有
+     * fast/slow 解法 https://leetcode.com/problems/find-the-duplicate-number/discuss/72846/My-easy-understood-solution-with-O(n)-time-and-O(1)-space-without-modifying-the-array.-With-clear-explanation.
      * */
     public int findDuplicate(int[] nums) {
         int n = nums.length;
@@ -39,21 +43,5 @@ public class LC287FindTheDuplicateNumber extends BasicTemplate {
             return slow;
         }
         return -1;
-    }
-
-    public int findDuplicateOld(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
-            while (nums[i] != i + 1 && nums[nums[i] - 1] != nums[i]) {
-                swap(nums, i, nums[i] - 1);
-            }
-        }
-        for (int i = 0; i < nums.length; i++) if (i + 1 != nums[i]) return nums[i];
-        return -1;
-    }
-
-    private void swap(int[] n, int i, int j) {
-        int t = n[i];
-        n[i] = n[j];
-        n[j] = t;
     }
 }

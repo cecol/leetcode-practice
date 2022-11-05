@@ -3,6 +3,7 @@ package leetcode202101.medium;
 import leetcode20200921to20201031.BasicTemplate;
 
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class LC542_01Matrix extends BasicTemplate {
@@ -44,5 +45,9 @@ public class LC542_01Matrix extends BasicTemplate {
             }
         }
         return matrix;
+    }
+
+    public double dis(int[] p) {
+        return Math.sqrt(Math.pow(p[0], 2) + Math.pow(p[1], 2));
     }
 }

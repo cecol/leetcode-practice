@@ -23,7 +23,7 @@ public class LC55JumpGame extends BasicTemplate {
      * 然後因為 i 可以到達 last, last就變成 i 繼續下去
      */
     public boolean canJump(int[] nums) {
-        int last = nums.length - 1, i, j;
+        int last = nums.length - 1, i;
         for (i = nums.length - 2; i >= 0; i--) {
             if (i + nums[i] >= last) last = i;
         }

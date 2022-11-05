@@ -21,7 +21,7 @@ public class LC3LongestSubstringWithoutRepeatingCharacters extends BasicTemplate
 
 
     /**
-     * sliding window, 花了很舊時間才解, 雖然是自己解, 一開始也有大致想法
+     * sliding window, 花了很久時間才解, 雖然是自己解, 一開始也有大致想法
      * 但一開始想錯了, 沒注意到他是包含任意字元
      * 接著又想錯, 要記憶的的 offset而非 count
      * */

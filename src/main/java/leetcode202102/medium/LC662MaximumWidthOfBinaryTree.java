@@ -5,10 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.TreeNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LC662MaximumWidthOfBinaryTree extends BasicTemplate {
   public static void main(String[] args) {
@@ -43,6 +40,35 @@ public class LC662MaximumWidthOfBinaryTree extends BasicTemplate {
    *
    * 之後就中往下遞迴(要確保先走左兒子  再走右兒子)
    */
+
+  /**
+   * 完全忘記原本解法, 但這次直接想到說 bfs, 然後直接改 TreeNode.val 成TreeNode的 index
+   * 這樣就可以在 bfs 遊歷時候去往後減, 來得知目前的寬度
+   * */
+  public int widthOfBinaryTree20221103(TreeNode rt) {
+    rt.val = 1;
+    Queue<TreeNode> bfs = new LinkedList<>();
+    int res = 1;
+    bfs.offer(rt);
+    while(bfs.size()>0) {
+      int s = bfs.size();
+      int b = bfs.peek().val;
+      for(int i=0;i<s;i++) {
+        TreeNode n = bfs.poll();
+        res = Math.max(res, n.val - b + 1);
+        if(n.left != null) {
+          n.left.val = 2*n.val;
+          bfs.offer(n.left);
+        }
+        if(n.right != null) {
+          n.right.val = 2*n.val + 1;
+          bfs.offer(n.right);
+        }
+      }
+    }
+    return res;
+  }
+
   int max = 0;
 
   public int widthOfBinaryTree(TreeNode root) {
