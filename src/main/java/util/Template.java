@@ -11,9 +11,12 @@ public class Template {
         Logger log = LoggerFactory.getLogger("Main");
         List<int[]> res = new ArrayList<>();
         res.toArray(new int[res.size()][2]);
+        Collections.reverse(res);
         int[][] intervals = new int[][]{{1, 2}};
         Arrays.sort(intervals, (x, y) -> x[0] - y[0]);
         Arrays.binarySearch(new int[2], 1);
+        Arrays.copyOf(new int[]{}, 1);
+
 
         Map<String, TreeMap<Integer, String>> m = new TreeMap<>();
         TreeMap<Integer, String> tm = new TreeMap<>();
@@ -21,8 +24,6 @@ public class Template {
         String s = "";
         Deque<TreeNode> bfs = new LinkedList<>();
         String.valueOf(1);
-        Integer.parseInt("");
-        "".split(",");
 
         Stack<Integer> monotonic = new Stack<>();
 
@@ -32,5 +33,6 @@ public class Template {
 
         Set<Integer> set = new HashSet<>();
 
+        new ArrayList<>(1);
     }
 }

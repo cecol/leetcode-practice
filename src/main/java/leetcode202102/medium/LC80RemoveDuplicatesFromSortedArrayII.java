@@ -20,7 +20,7 @@ public class LC80RemoveDuplicatesFromSortedArrayII extends BasicTemplate {
     /**
      * 這題自己想了半天 處理一堆有的沒的 就是沒想到可以這麼簡單...
      * https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/discuss/27976/3-6-easy-lines-C%2B%2B-Java-Python-Ruby
-     *
+     * 快慢 pointer, 關鍵是比較 slow pointer 那一個
      * */
     public int removeDuplicates(int[] nums) {
         int i = 0;

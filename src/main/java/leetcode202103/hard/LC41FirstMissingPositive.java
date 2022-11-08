@@ -32,21 +32,21 @@ public class LC41FirstMissingPositive extends BasicTemplate {
      * 1. 先區分 1 to n 之間, 並拿 nums[i]中 1 to n 來當 index, 來把該位置改成負數
      * -> 沒被改到的, 就是缺乏的正整數
      * -> 因為要處理 0 與負數還有 大於n -> 所以有第一個for 來處理 0 與負數把他們設定成 n+1
-     * */
+     */
     public int firstMissingPositive(int[] nums) {
         int n = nums.length;
-        for(int i=0;i<n;i++) {
-            if(nums[i] <=0 || nums[i] > n) nums[i] = n+1;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] <= 0 || nums[i] > n) nums[i] = n + 1;
         }
 
-        for(int i=0;i<n;i++) {
+        for (int i = 0; i < n; i++) {
             int num = Math.abs(nums[i]);
-            if(num > n) continue;
+            if (num > n) continue;
             int idx = num - 1;
-            if(nums[idx] > 0) nums[idx] *= -1;
+            if (nums[idx] > 0) nums[idx] *= -1;
         }
 
-        for(int i=0; i< n;i++) if(nums[i]>=0) return i+1;
-        return n+1;
+        for (int i = 0; i < n; i++) if (nums[i] > 0) return i + 1;
+        return n + 1;
     }
 }

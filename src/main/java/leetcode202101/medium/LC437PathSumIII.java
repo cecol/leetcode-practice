@@ -46,14 +46,17 @@ public class LC437PathSumIII extends BasicTemplate {
      * ->   代表在累加過程中有有出現過加總是 10, 再配上後面加總是30, 代表中間有一段加總是20 就是target
      * 代表之前累加過程中就有算過x(因此之後才又達到cur, cur是一定有的, map又是存cur之前出現的加總過程, 有可能有x有可能沒有,
      * -> 但是如果有x就代表從x 到 cur 就是 target)
+     *
+     * 2022/11/5 原本答案會錯 因為給的 TreeNode.val 加總會大過 Integer
+     * 原本的 Map<Integer, Integer> 要改成 Map<Long, Integer>
      */
     public int pathSum2(TreeNode root, int sum) {
-        Map<Integer, Integer> m = new HashMap<>();
-        m.put(0, 1);
-        return checkByPreSum(m, root, 0, sum);
+        Map<Long, Integer> m = new HashMap<>();
+        m.put(0L, 1);
+        return checkByPreSum(m, root, 0L, sum);
     }
 
-    private int checkByPreSum(Map<Integer, Integer> preSumCount, TreeNode root, int curSum, int target) {
+    private int checkByPreSum(Map<Long, Integer> preSumCount, TreeNode root, long curSum, int target) {
         if (root == null) return 0;
         curSum += root.val;
         int middleSumCount = preSumCount.getOrDefault(curSum - target, 0);
