@@ -38,10 +38,12 @@ public class LC99RecoverBinarySearchTree extends BasicTemplate {
    *  先檢查 first
    *  if(firstEle == null && prevEle.val > n.val) firstEle = prevEle;
    *  當first還沒找到, 但當前node n小於前一個prevELe -> 不符合中序(因為左邊已走完,prevEle應該小於當前node)
-   *  -> 所以prev必然是firstEle, 因為prev是錯置的
+   *  -> 所以prev必然是firstEle, 因為prev是錯置的 -> 找到大的
    *  if(firstEle != null && prevEle.val > n.val) secondEle = n;
    *  當first找到了, 就是找second -> 當前node n小於前一個prevELe -> 不符合中序(因為左邊已走完,prevEle應該小於當前node)
-   *  -> 所以當前node 就是找second -> 代表當前node n 是錯置的
+   *  -> 所以當前node 就是找second -> 代表當前node n 是錯置的 -> 找到小的
+   *
+   *  然後大firstEle 小secondEle 對調
    *
    *  所以整個重點在於記載 prev node 來判定
    *  1. 如果大點尚未找到 就出現prev > current node -> prev一定是前面大點要往後移

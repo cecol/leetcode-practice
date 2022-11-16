@@ -33,6 +33,5 @@ public class Template {
 
         Set<Integer> set = new HashSet<>();
 
-        new ArrayList<>(1);
     }
 }
