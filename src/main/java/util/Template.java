@@ -32,6 +32,5 @@ public class Template {
         StringBuilder sb = new StringBuilder();
 
         Set<Integer> set = new HashSet<>();
-
     }
 }
