@@ -18,7 +18,7 @@ public class LC261GraphValidTree extends BasicTemplate {
             if (!u(p, e[0], e[1])) return false;
             c++;
         }
-        return c == n;
+        return c == n - 1;
     }
 
     private int f(int[] p, int i) {
