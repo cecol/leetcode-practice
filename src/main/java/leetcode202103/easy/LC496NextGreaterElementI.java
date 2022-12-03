@@ -17,6 +17,10 @@ public class LC496NextGreaterElementI extends BasicTemplate {
      * 原本以為我不會, 後來才發現是題目敘述太爛,
      * 我看成以為 int[] nums1 element x 下一的大的得在 nums2 同位置之後開始找, 但事實上不用
      * https://leetcode.com/problems/next-greater-element-i/discuss/97614/Confusing-statement
+     *
+     * 基本上就是維持一個 monotonic decrease stack
+     * 如果遇到 nums2[i] > stack.top, 代表可以兌現前面的元素
+     * 就找出該兌現是否出現在 nums1, 有就更新 兌現 的 next greater
      * */
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         Deque<Integer> q = new LinkedList<>();

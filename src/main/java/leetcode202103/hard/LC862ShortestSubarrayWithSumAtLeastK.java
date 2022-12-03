@@ -55,7 +55,7 @@ public class LC862ShortestSubarrayWithSumAtLeastK extends BasicTemplate {
      */
     public int shortestSubarray(int[] A, int K) {
         int N = A.length, res = N + 1;
-        int[] B = new int[N + 1];
+        long[] B = new long[N + 1];
         for (int i = 0; i < N; i++) B[i + 1] = B[i] + A[i];
         Deque<Integer> d = new LinkedList<>();
         for (int i = 0; i < N + 1; i++) {

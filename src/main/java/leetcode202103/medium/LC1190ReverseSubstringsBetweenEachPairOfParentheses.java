@@ -6,13 +6,42 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class LC1190ReverseSubstringsBetweenEachPairOfParentheses extends BasicTemplate {
     public static void main(String[] args) {
         Logger log = LoggerFactory.getLogger("Main");
         var LC = new LC1190ReverseSubstringsBetweenEachPairOfParentheses();
-        LC.reverseParentheses("(abcd)");
-        LC.reverseParentheses("(ed(et(oc))el)");
+        LC.reverseParentheses2("(abcd)");
+        LC.reverseParentheses2("(ed(et(oc))el)");
+    }
+
+    /**
+     * 2022/11/30 再解
+     * 發現這類題目有個 pattern
+     * 就是字串內有 (/) 來表達要操作的優先權特性
+     * 然後用 Stack 暫存狀態, ( => push, ) => pop 兌現成當前最新狀態
+     * 類似題目有
+     * LC1190ReverseSubstringsBetweenEachPairOfParentheses
+     * LC856ScoreOfParentheses
+     * LC224BasicCalculator
+     * pattern 筆記 https://docs.google.com/document/d/1eieS66zQiWObyYMOp8nDws_53Q9V77FudMNq7uQrzGc/edit?usp=sharing
+     * */
+    public String reverseParentheses2(String s) {
+        Stack<String> sk = new Stack<>();
+        StringBuilder cur = new StringBuilder();
+        for(int i = 0;i<s.length();i++) {
+            if(s.charAt(i) == '(') {
+                sk.push(cur.toString());
+                cur.delete(0, cur.length());
+            } else if(s.charAt(i) == ')') {
+                String pre = sk.pop();
+                cur = new StringBuilder(pre + cur.reverse().toString());
+            } else {
+                cur.append(s.charAt(i));
+            }
+        }
+        return cur.toString();
     }
 
     /**
@@ -20,7 +49,7 @@ public class LC1190ReverseSubstringsBetweenEachPairOfParentheses extends BasicTe
      * 後來看到有 O(N) 覺得有意思
      * https://leetcode.com/problems/reverse-substrings-between-each-pair-of-parentheses/discuss/383670/JavaC%2B%2BPython-Tenet-O(N)-Solution
      */
-    public String reverseParentheses(String s) {
+    public String reverseParentheses1(String s) {
         Deque<Character> q = new LinkedList<>();
         for (char c : s.toCharArray()) {
             if (c != ')') q.add(c);

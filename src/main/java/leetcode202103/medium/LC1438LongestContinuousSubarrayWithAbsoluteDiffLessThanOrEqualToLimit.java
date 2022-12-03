@@ -11,7 +11,7 @@ public class LC1438LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLim
     public static void main(String[] args) {
         Logger log = LoggerFactory.getLogger("Main");
         var LC = new LC1438LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
-        LC.longestSubarray(new int[]{8, 2, 4, 7}, 4);
+        LC.longestSubarray(new int[]{1, 5, 6, 7, 8, 10, 6, 5, 6}, 4);
     }
 
     /**
@@ -29,6 +29,25 @@ public class LC1438LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLim
      * deque min會砍掉比自己大的代表往後的window 要繼續當window min的更沒希望
      * 若 window 目前max, min(一定都在queue的頭) 超過limit -> 縮表 -> 更新min/max queue
      * 最後的 j - i 就是最大的 window
+
+     * 2022/12/3 一直對於 i++ 且回傳 j - i 有困惑
+     * - if (max.peek() - min.peek() > limit) {
+     * -   if (max.peek() == nums[i]) max.poll();
+     * -   if (min.peek() == nums[i]) min.poll();
+     * -   i++;
+     * - }
+     * 沒有很看懂, 後來看到 TreeMap 解法才發現也是 i++, 回傳 j-i
+     * https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/discuss/609771/JavaC++Python-Deques-O(N)/710540
+     * <p>
+     * 後來才想到 i 不是直接代表 i offset to j offset f 區間的 subarray
+     * i 是代表目前 subarray 可能大小, 因為 j 一定會走到 n, 如果 i == 0, 都沒遇到超界, 代表整個 subarray n 都是符合
+     * 如果遇到超界, 代表拿 i = 0, 去找 subarray 是不可能存在
+     * 所以得 i++, 代表目前可能可以的 subarray size 是 n-1
+     * 所以得
+     * if (max.peek() == nums[i]) max.poll();
+     * if (min.peek() == nums[i]) min.poll();
+     * 看看目前是否  nums[i] 剛好是 min or min, 也可能都不是, 代表下一圈又要 i++, 直到真的有刪到 min or max
+     * 或者就是 一路加到 剩下 j-i=1
      */
     public int longestSubarray(int[] nums, int limit) {
         Deque<Integer> max = new LinkedList<>();
@@ -39,9 +58,9 @@ public class LC1438LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLim
             while (min.size() > 0 && nums[j] < min.peekLast()) min.pollLast();
             max.add(nums[j]);
             min.add(nums[j]);
-            if(max.peek() - min.peek() > limit) {
-                if(max.peek() == nums[i]) max.poll();
-                if(min.peek() == nums[i]) min.poll();
+            if (max.peek() - min.peek() > limit) {
+                if (max.peek() == nums[i]) max.poll();
+                if (min.peek() == nums[i]) min.poll();
                 i++;
             }
         }

@@ -12,6 +12,96 @@ public class LC218TheSkylineProblem extends BasicTemplate {
         var LC = new LC218TheSkylineProblem();
     }
 
+    class SegTree {
+        SegTree left, right;
+        int start, end;
+        int info;
+        boolean tag;
+
+        SegTree(int s, int e) {
+            start = s;
+            end = e;
+            if (s == e) return;
+            int mid = s + (e - s) / 2;
+            left = new SegTree(s, mid);
+            right = new SegTree(mid + 1, e);
+        }
+
+        void pushDown() {
+            if (tag && left != null) {
+                tag = false;
+                left.info += info;
+                right.info += info;
+                left.tag = true;
+                right.tag = true;
+            }
+        }
+
+        void updateRange(int s, int e, int v) {
+            if (e < start || s > end) return;
+            if (s <= start && e >= end) {
+                info = v;
+                tag = true;
+                return;
+            }
+
+            pushDown();
+            left.updateRange(s, e, v);
+            right.updateRange(s, e, v);
+            info = Math.max(left.info, right.info);
+        }
+
+        int queryRange(int s, int e) {
+            if (e < start || s > end) return Integer.MIN_VALUE;
+            if (s <= start && e >= end) return info;
+            pushDown();
+            int res = Math.max(left.queryRange(s, e), right.queryRange(s, e));
+            info = Math.max(left.info, right.info);
+            return res;
+        }
+    }
+
+    void dfs(SegTree rt) {
+        if (rt.start == rt.end || rt.tag) height.add(List.of(rt.start, rt.info));
+        else {
+            dfs(rt.left);
+            dfs(rt.right);
+        }
+    }
+
+    List<List<Integer>> height = new ArrayList<>();
+
+    public List<List<Integer>> getSkyline(int[][] buildings) {
+        TreeSet<Integer> ts = new TreeSet<>();
+        for (int[] b : buildings) {
+            ts.add(b[0]);
+            ts.add(b[1]);
+        }
+
+        Map<Integer, Integer> idx2Pos = new HashMap<>();
+        Map<Integer, Integer> pos2Idx = new HashMap<>();
+        int idx = 0;
+        for (Integer i : ts) {
+            idx2Pos.put(idx, i);
+            pos2Idx.put(i, idx);
+            idx++;
+        }
+
+        int n = ts.size();
+        SegTree rt = new SegTree(0, n - 1);
+        Arrays.sort(buildings, Comparator.comparingInt(x -> x[2]));
+        for (int[] b : buildings) {
+            rt.updateRange(pos2Idx.get(b[0]), pos2Idx.get(b[1]) - 1, b[2]);
+        }
+        dfs(rt);
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < height.size(); i++) {
+            res.add(List.of(idx2Pos.get(height.get(i).get(0)), height.get(i).get(1)));
+            while (i + 1 < height.size() && height.get(i + 1).get(1) == height.get(i).get(1)) i++;
+        }
+        return res;
+    }
+
     /**
      * https://leetcode.com/problems/the-skyline-problem/discuss/61192/Once-for-all-explanation-with-clean-Java-code(O(n2)time-O(n)-space)
      * 這個是看過最好的解釋，直接針對關鍵點下去解釋:
@@ -29,9 +119,15 @@ public class LC218TheSkylineProblem extends BasicTemplate {
      * -> height.add(new int[]{b[0], -b[2]});
      * -> height.add(new int[]{b[1], b[2]});
      * -> start 配上的是 -height, end 配上的是 +height -> 用於表示當前踩到的是 start or end
-     * -> Collections.sort(height) -> 依x position 來排序, 若高度一樣, 矮的先
-     * ->-> 這是因為都是 start 時，要先拿高的，避免重複算同一個位置的上升, 都是 end 時，要先拿矮的，避免重複算同一個位置的下降
-     * ->-> start end 各一的時候 start必輸  因為 start配的 h都負數 -> 所以先算到下降在看上升, 先把end 收掉在看
+     * -> Collections.sort(height) -> 依 x position 來排序, x 先出現先有機會覆蓋到其他人
+     * -    但如果 2點 ｘ 都一樣, 選擇 x[1] - y[1] 比較
+     * -    兩者都是 -h1, -h2, 都是 start, 高的那一個優先覆蓋到其他人(後續 pq 那邊遇到 start 是加入覆蓋行列)
+     * -        高的換成 -h 更低, 所以 x[1] - y[1] 會放在前面
+     * -    兩者都是 +h1, +h2, 都是 end, 低的優先退出(後續 pq 那邊遇到 end 是退出),
+     * 所以 x[1] - y[1] end h 低的 會放在前面, 讓同樣高的留在裡面,
+     * -        如果高的 end 先退出 pq, 會造成高低變化, 會記錄到錯的點 (同一個 ｘ 位置, 但他會邊下降邊以為又遇到先的高低變化)
+     * -    一著 -h(start), 一者 +h(end), -h 優先考量, 先看 start 覆蓋是否創造新的 高度變化
+     * -        再看 end 退出, 用 x[1] - y[1] 符合前兩者也不違背結果
      * 然後我們要去記錄當前遇到的高度, 然後拿最高的 take effect -> PriorityQueue
      * --> 用來記錄當前走到的所有有機會來影響的高度
      * 1. 如果拿到 start point -> 塞進PriorityQueue -> 就有機會影響當前的contour -> 加進去如果是最大->就會開始影響
@@ -41,11 +137,11 @@ public class LC218TheSkylineProblem extends BasicTemplate {
      * PriorityQueue 用來記錄當前走到的高度, 要default 塞0, 因為沒有building時候, 0 也在 contour中
      * <p>
      * 簡化版關鍵點
-     * 1. 攤平 {start, -h}, {end, h} 並且用start/end值排序 -> 如果一樣用 h, 矮的優先, (h or -h用來辨識是start or end)
+     * 1. 攤平 {start, -h}, {end, h} 並且用start/end值排序 -> 如果一樣用 h 比較: x[1] - y[1], (h or -h用來辨識是start or end)
      * 2. visit 上面的 list, 並且 start -> 塞入h到 Queue(開始有影響力), end -> 刪除queue中該h(因為沒影響力)
      * 3. 拿出 q.peek() 當前累計最大 height -> 看看是否跟 prev 相等, 不同代表發生高低變化 -> 加入 result
      */
-    public List<List<Integer>> getSkyline(int[][] buildings) {
+    public List<List<Integer>> getSkylinePQ(int[][] buildings) {
         List<List<Integer>> res = new ArrayList<>();
         List<int[]> height = new ArrayList<>();
         for (int[] b : buildings) {

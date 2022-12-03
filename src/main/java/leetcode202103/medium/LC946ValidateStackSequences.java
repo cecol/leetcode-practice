@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class LC946ValidateStackSequences extends BasicTemplate {
     public static void main(String[] args) {
@@ -14,20 +15,23 @@ public class LC946ValidateStackSequences extends BasicTemplate {
         LC.validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 2, 1});
     }
 
+    /**
+     * https://leetcode.com/problems/validate-stack-sequences/discuss/1853250/JavaC%2B%2B-Space-Complexity-going-from-O(N)-greater-O(1)
+     * 想不到這題就是很直觀的 Greedy, 照著給的 pushed/popped 來操作
+     * 1. go though pushed[i] 每次直接 push,
+     * 2. 檢查如果 sk.top == popped[idx] -> sk.pop, idx++, 直到不一樣
+     * 3. 檢查是否 sk 是否為空
+     */
     public boolean validateStackSequences(int[] pushed, int[] popped) {
-        Deque<Integer> q = new LinkedList<>();
-        int j = 0;
-        for (int i = 0; i < pushed.length; i++) {
-            while (q.size() > 0 && q.getLast() == popped[j]) {
-                q.pollLast();
-                j++;
+        int idx = 0;
+        Stack<Integer> sk = new Stack<>();
+        for (int p : pushed) {
+            sk.push(p);
+            while(sk.size() > 0 && sk.peek() == popped[idx]) {
+                idx++;
+                sk.pop();
             }
-            q.add(pushed[i]);
         }
-        while (j < popped.length) {
-            if (q.size() == 0) return false;
-            else if (popped[j++] != q.pollLast()) return false;
-        }
-        return true;
+        return sk.isEmpty();
     }
 }

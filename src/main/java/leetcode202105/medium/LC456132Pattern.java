@@ -23,7 +23,7 @@ public class LC456132Pattern extends BasicTemplate {
      * stack 的 O(n) 是這篇有比較懂
      * https://leetcode.com/problems/132-pattern/discuss/906789/Short-Java-O(N)-Solution-with-Detailed-Explanation-and-Sample-Test-Case-or-Stack-or-100
      * 1. 從尾巴開始iterate
-     * 2. 用一個 global variable second 記憶 2 pattern 就是 nums[i] < nums[k] < nums[j] 中的 nums[j]
+     * 2. 用一個 global variable second 記憶 2 pattern 就是 nums[i] < nums[k] > nums[j] 中的 nums[j]
      * 3. stack 記憶 32 pattern, 然後看看目前走到是否有 1 pattern
      * -> 所以 stack 記憶的是 由top -> bottom 是遞增
      * -> 如果當前 nums[i] > stack.top -> second = stack.pop();
