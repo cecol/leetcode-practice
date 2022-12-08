@@ -26,6 +26,16 @@ public class LC130SurroundedRegions extends BasicTemplate {
    *
    * Trick
    * We search for invalid candidates (and exclude them) rather than search for valid candidates.
+   *
+   * 2022/12/6 回來看還是卡住, 題意還是沒看好！！
+   * 關鍵是以為只是外圍 O 換成 X, 但其實是只要 4 週都被包圍, 全部都是要換成 X !!
+   * A region is captured by flipping [all] 'O's into 'X's in that surrounded region.
+   *
+   * 所以這樣就很簡單, 只有邊界的 O 跟接連不斷的 O 不能被換成 X, 其他都可以
+   * 所以反過來先 dfs 標記 邊界的 O 成為 *,
+   * 標完後 全部走一遍
+   * if '*' -> 'O'
+   * else if 'O' -> 'X'
    */
   public void solve(char[][] board) {
     if (board.length < 2 || board[0].length < 2) return;

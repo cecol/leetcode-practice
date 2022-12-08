@@ -21,6 +21,20 @@ public class LC529Minesweeper extends BasicTemplate {
     /**
      * 有解開, 花比較多時間理解踩地雷規則
      * faster than 100.00%, less than 37.31% of Java
+     *
+     * 2022/12/6 回來解還是卡住, 紀錄幾個重點
+     * 1. DFS(board, x, y) 下去找
+     * - x,y 超屆 return
+     * - board[x][y] 既不是 M 也不是 E -> 代表走過 , return
+     * - board[x][y] 是 M, 改成 X, return
+     * - board[x][y] 是 E,
+     * -   檢查周遭雷數
+     * -      if 雷數 > 0 -> board[x][y] == 雷數, return
+     * -      if 雷數 == 0 -> board[x][y] == B, dfs
+     *
+     * 關鍵在於分清楚優先順序
+     * 先邊界, 後內容(M/E), 在雷數(數字), 最後 dfs(B, 繼續下去), dfs 有9方位下去
+     *
      */
     public char[][] updateBoard(char[][] board, int[] click) {
         dfs(board, click[0], click[1]);

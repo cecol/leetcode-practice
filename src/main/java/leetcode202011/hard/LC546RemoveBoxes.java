@@ -9,11 +9,8 @@ public class LC546RemoveBoxes extends BasicTemplate {
   }
 
   /**
-   * 先看懂花花醬有解釋基本原理(但沒看懂後面的case 2)
-   * https://www.youtube.com/watch?v=wT7aS5fHZhs&feature=emb_title&ab_channel=HuaHua
-   * <p>
    * 這邊更完整的解釋dp[i][j][k]的解釋方式
-   * https://leetcode.com/problems/remove-boxes/discuss/386810/Python-my-thoughts-on-DP-detailed-explanation
+   * https://leetcode.com/problems/remove-boxes/solutions/101310/Java-top-down-and-bottom-up-DP-solutions/
    * example case boxes = [1,2,1,1,4,3,1,3,1]
    * index:  [0,1,2,3,4,5,6,7,8]
    * 1. dp[i][j][k] 是記載i到j的最佳解
@@ -57,8 +54,6 @@ public class LC546RemoveBoxes extends BasicTemplate {
    * (這個是一開始看的解釋, 但沒有看得很懂)
    */
   public int removeBoxes(int[] boxes) {
-    if (boxes == null || boxes.length == 0) return 0;
-    if (boxes.length == 1) return 1;
     int n = boxes.length;
     int[][][] dp = new int[n][n][n];
     return rb(boxes, dp, 0, n - 1, 0);
@@ -68,6 +63,7 @@ public class LC546RemoveBoxes extends BasicTemplate {
     if (i > j) return 0;
     if (dp[i][j][k] > 0) return dp[i][j][k];
     //優化步驟, 如果剛好boxes[i+1]==boxes[i], 先繼續往下找, 直到下一個不等於boxes[i], 才可以切出左右問題
+    int i0 = i, k0=k;
     for (; i + 1 < j && b[i] == b[i + 1]; i++, k++) ;
     int res = (k + 1) * (k + 1) + rb(b, dp, i + 1, j, 0);
     for (int m = i + 1; m <= j; m++) {
@@ -81,7 +77,7 @@ public class LC546RemoveBoxes extends BasicTemplate {
         );
       }
     }
-    dp[i][j][k] = res;
+    dp[i0][j][k0] = res;
     return res;
   }
 

@@ -15,6 +15,8 @@ public class LC785IsGraphBipartite extends BasicTemplate {
   /**
    * 類似 LC886, 就是DFS + color painting, paint 1 or paint -1
    * 如果過程中要paint的對象已被paint過, 且跟要paint的color不同 -> false, 無法分兩邊(無法分兩種顏色)
+   * 其實關鍵是 無法 Bipartite 的 cycle 是 odd edge cycle, 所以在著色時候 對於著過的, cycle踩到會著到 反色
+   * 如果 cycle 是 even edge, 對於著過的, cycle踩到 會著到 要的顏色
    * */
   public boolean isBipartite(int[][] graph) {
     int n = graph.length;
