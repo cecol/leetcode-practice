@@ -36,6 +36,13 @@ public class LC332ReconstructItinerary extends BasicTemplate {
      * -> since every node except for the first and the last node has even number of edges,
      * -> when we enter a node we can always get out
      * 就是說除了起點和終點, 其他點都是 even degree, 確保進來就可以出去
+     * 有向圖
+     * 1. 起點 outDegree - inDegree == 1
+     * 2. 終點 inDegree - outDegree == 1
+     * 3. 其他點 inDegree - outDegree == 0
+     * 無向圖
+     * 1. 起點終點 degree = odd
+     * 2.其他點 degree == even
      * (Eulerian cycle是所有點都是 even degree, Eulerian path/trail是只有起點終點以外)
      * -> we are at the destination and if all edges are visited, we are done
      * -> 所以只有終點先dfs結束 -> 然後遞迴回到前一點

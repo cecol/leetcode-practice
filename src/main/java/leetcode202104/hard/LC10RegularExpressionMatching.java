@@ -37,14 +37,15 @@ public class LC10RegularExpressionMatching extends BasicTemplate {
      * -> else dp[i][j] = (dp[i][j - 2] || dp[i - 1][j - 1] || dp[i - 1][j]);
      * -> 有比對前一字元 or 是 '.'(可以中任意字元) -> 有很多選項都可以取(全部 or 起來)
      * -> dp[i][j - 2] -> 無視 p[j] 是 * 的整個 pattern 就是當作 0 match
-     * -> dp[i - 1][j - 2] -> 有拿p[j] * 的pattern -> 1 match -> 當前j有中 -> 所以回頭看看 i-1, j-2 的情況
-     * -> dp[i - 1][j] -> 有拿p[j] * 的pattern -> many match -> 當前j有中 -> 就是拿 i-1 match到j 的結果來用
+     * -> dp[i - 1][j - 2] -> 有拿p[j] * 的pattern -> 1 match -> 當前 j-1 有中 -> 所以回頭看看 i-1, j-2 的情況有沒有中
+     * -> dp[i - 1][j] -> 有拿p[j] * 的pattern -> many match -> 當前 j-1 有中 -> 就是拿之前 i-1 有沒有 many match 到 j
      * ->   這部分我沒有很理解, 目前理解方式就是, 如果 s(i-1) char == s(i) char, ex: P: a*, S: aaaaa
      * ->   那dp[i-1][j]就會是 true, 因為j是 *, 重複多個可以納入
      * ->   如果 s(i-1) char != s(i) char, 那dp[i-1][j]就會是 false, 那也不影響當前的 dp[i][j]
      * -> (因為i-1也是可以往後match到j 如果當時計算時候有算到 true)
      *
      * 再次回來釐清 為什麼 if (preCurP != '.' && preCurP != curS) dp[i][j] = dp[i][j - 2]; 都沒中時候是 j-2?
+     * -> 2022/12/15 review, s(i)/p(j) 中了就是繼承 i-1/j-1, 同理 s(i)/p(j-1) 中了不也同理繼承 i-1/j-2 (大家一起回退一格!!)
      * -> 因為 #####a(i)
      * ->     ####b*(j) -> a(i) 沒中* 也沒中 b(j-1), 只好退到 j-2, dp[i][j] = dp[i][j - 2];
      * -> 所以把 *(j), b(j-1) 當成空氣來比對, 所以直接拿 dp[i][j-2]
