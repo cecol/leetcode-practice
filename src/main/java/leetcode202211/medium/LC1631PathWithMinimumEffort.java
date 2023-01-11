@@ -25,13 +25,13 @@ public class LC1631PathWithMinimumEffort extends BasicTemplate {
      * 然後找 mid 下去 走看看
      * 但是走的過程不能用dfs 會走不完
      * 用 bfs 走到終點就可以
-     *
+     * <p>
      * if (mx >= 0 && mx < m && my >= 0 && my < n && effort >= Math.abs(h[x][y] - h[my][my]) && seen.add(mx * n + my))
      * 這邊我卡超久 關鍵在於
-     *
+     * <p>
      * 要先比過 effort >= Math.abs(h[x][y] - h[my][my])
      * 才可以放 seen.add(mx * n + my)
-     *
+     * <p>
      * 如果先 seen.add(mx * n + my) && effort >= Math.abs(h[x][y] - h[my][my])
      * 會錯
      * 因為可能比不過, 所以當下沒走, 但之後可以回來走 !!
@@ -67,10 +67,9 @@ public class LC1631PathWithMinimumEffort extends BasicTemplate {
             int x = cur[0], y = cur[1];
             if (x == m - 1 && y == n - 1) return true;
             for (int[] d : dirs) {
-                int mx = d[0] + x, my = d[1] + y;
-                if (mx >= 0 && mx < m && my >= 0 && my < n && effort >= Math.abs(h[x][y] - h[my][my]) && seen.add(mx * n + my)) {
+                int mx = x + d[0], my = y + d[1];
+                if (0 <= mx && mx < m && 0 <= my && my < n && effort >= Math.abs(h[mx][my] - h[x][y]) && seen.add(mx * n + my))
                     q.offer(new int[]{mx, my});
-                }
             }
         }
         return false;

@@ -53,6 +53,13 @@ public class LC424LongestRepeatingCharacterReplacement extends BasicTemplate {
      * https://leetcode.com/problems/longest-repeating-character-replacement/discuss/91285/Sliding-window-similar-to-finding-longest-substring-with-k-distinct-characters
      * 在if (j - i + 1 - maxCount > k) 縮表中有特地去找當前的 maxCount
      * 答案也是依樣, 所以證實當maxCount出現過一次後也正是答案那次, 後續都不重要了
+     *
+     * 2023/1/2
+     * maxCount 需不需要 decrease update 這邊有說其實是 Greedy 思考
+     * https://leetcode.com/problems/longest-repeating-character-replacement/solutions/91285/Sliding-window-similar-to-finding-longest-substring-with-k-distinct-characters/comments/1381509
+     * 我們只在乎最大 max subarray, 所以也只在乎 window increases , window increases 時 maxCount 也 increase, 所以只計算 increase
+     * 不計算 decrease
+     *
      */
     public int characterReplacement(String s, int k) {
         log.debug(s);

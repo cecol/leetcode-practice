@@ -15,7 +15,7 @@ public class LC665NonDecreasingArray extends BasicTemplate {
     /**
      * https://leetcode.com/problems/non-decreasing-array/discuss/106826/JavaC%2B%2B-Simple-greedy-like-solution-with-explanation
      * 一直覺得這種array 題目, 很沒有一定的pattern, 在考你是否能夠觀察出該題的特徵
-     * 雖然這答案有說服我, 但我真不知道一看摋這樣想的人是怎麼得到靈感的
+     * 雖然這答案有說服我, 但我真不知道一看到題目就這樣想的人是怎麼得到靈感的
      * nums[i-1] > nums[i] for some i, you will prefer to change nums[i-1]'s value, since a larger nums[i] will give you more risks
      * nums[i-1] > nums[i] -> 優先去換 nums[i-1], 因為是對nums[i-1]變小, nums[i]變大的話, 增加破壞後面遞增的可能性
      * 先用一個 int cnt = 0; 記載換過幾次

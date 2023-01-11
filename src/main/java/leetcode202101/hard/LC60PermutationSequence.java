@@ -49,9 +49,9 @@ public class LC60PermutationSequence extends BasicTemplate {
    * 3 -> "213" -> 1
    * 4 -> "231" -> 1
    * 5 -> "312" -> 2
-   * 6 -> "321" -> 3
+   * 6 -> "321" -> 2
    * notUsed = 1,2,3, k = 6
-   * k-1/f(n-1) -> (6-1)/(3-1) = 2 就是 3 in notUsed(offset)
+   * k-1/f(n-1) -> (6-1)/f(3-1) = 2 就是 3 in notUsed(offset)
    * index = 2 代表取到3也代表前面1,2的permutation可能性的刪除掉
    *
    * 所以k要在更新才會達成下面 -> k -= index * factorial; -> 5 - 2*2 = 1 -> k = 1

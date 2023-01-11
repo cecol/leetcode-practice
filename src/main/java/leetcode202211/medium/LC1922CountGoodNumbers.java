@@ -22,7 +22,7 @@ public class LC1922CountGoodNumbers extends BasicTemplate {
      * 公式: 如果 n 是幾奇數, 種數 5^(n/2+1) * 4^n/2 (n/2+1 位數是偶數, n/2 位數是質數)
      * <p>
      * 但 N 可以大到 10^15 -> 不可能直接算 5^(N/2) 太大也太慢: O(N)
-     *
+     * <p>
      * power 要自己做
      * 比如說 2^10 可以拆解成 2^5 * 2^5
      * 所以 power(x ,y) 要下去遞迴
@@ -36,10 +36,7 @@ public class LC1922CountGoodNumbers extends BasicTemplate {
         long second = n / 2;
         long mul1 = power(5, first) % mod;
         long mul2 = power(4, second) % mod;
-        long res = 1;
-        res = res * mul1 % mod;
-        res = second != 0 ? res * mul2 % mod : res;
-        return (int) (res % mod);
+        return (int) (mul1 * mul2 % mod);
     }
 
     long power(long x, long y) {

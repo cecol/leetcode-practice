@@ -12,6 +12,31 @@ public class LC143ReorderList extends BasicTemplate {
     }
 
     /**
+     * 2023/1/3 莫明其妙想出一個更簡單的遞迴方法
+     * 1. 找出 tail, preTail
+     * 2. ListNode h2 = head.next;
+     * 3. preTail.next = null;
+     * 4. head.next = tail;
+     * 5. tail.next = rev(h2);
+     * 6. return tail
+     * */
+    public void reorderList2(ListNode head) {
+        rev(head);
+    }
+
+    ListNode rev(ListNode h) {
+        if(h == null || h.next == null) return h;
+        ListNode cur = h;
+        while(cur.next.next != null) cur = cur.next;
+        ListNode tail = cur.next;
+        cur.next = null;
+        ListNode h2 = h.next;
+        h.next = tail;
+        tail.next = rev(h2);
+        return h;
+    }
+
+    /**
      * https://leetcode.com/problems/reorder-list/discuss/44992/Java-solution-with-3-steps
      * 就算解完, Reverse a linked list I & II, 這題大概可以猜出怎麼解, 但思路還是不夠清晰
      * 1. 先找到 middle node,

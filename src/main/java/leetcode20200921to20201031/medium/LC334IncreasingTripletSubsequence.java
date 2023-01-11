@@ -13,13 +13,41 @@ import leetcode20200921to20201031.BasicTemplate;
  * minimum ending of LIS whose length is 2
  */
 public class LC334IncreasingTripletSubsequence extends BasicTemplate {
-  public static void main(String[] args) {
-    var LC = new LC334IncreasingTripletSubsequence();
-    var r = increasingTriplet(new int[]{1, 0, 10, 0, 0, 0, 0, 100000000});
-    System.out.println(r);
-  }
+    public static void main(String[] args) {
+        var LC = new LC334IncreasingTripletSubsequence();
+    }
 
-    public static boolean increasingTriplet(int[] nums) {
+    /**
+     * https://github.com/wisdompeak/LeetCode/tree/master/Greedy/334.Increasing-Triplet-Subsequence
+     * 這個解法比較直觀 針對每個 nums[i] i = 0 to n-2
+     * 找出他們的 leftMin/rightMax 只要找到一組
+     * leftMin[i] < nums[i] && rightMax[i] > nums[i], 就可以了
+     * <p>
+     * 所以算 leftMin[i]
+     * - leftMin[0] = Integer.MAX_VALUE;
+     * - for (int i = 1; i < n; i++) leftMin[i] = Math.min(leftMin[i - 1], nums[i - 1]);
+     * <p>
+     * 所以算 rightMax[i]
+     * - rightMax[n - 1] = Integer.MIN_VALUE;
+     * - for (int i = n - 2; i >= 0; i--) rightMax[i] = Math.max(rightMax[i + 1], nums[i + 1]);
+     * -
+     */
+    public boolean increasingTriplet(int[] nums) {
+        int n = nums.length;
+        if (n < 3) return false;
+        int[] leftMin = new int[n];
+        leftMin[0] = Integer.MAX_VALUE;
+        for (int i = 1; i < n; i++) leftMin[i] = Math.min(leftMin[i - 1], nums[i - 1]);
+        int[] rightMax = new int[n];
+        rightMax[n - 1] = Integer.MIN_VALUE;
+        for (int i = n - 2; i >= 0; i--) rightMax[i] = Math.max(rightMax[i + 1], nums[i + 1]);
+        for (int i = 1; i < n - 1; i++) {
+            if (leftMin[i] < nums[i] && rightMax[i] > nums[i]) return true;
+        }
+        return false;
+    }
+
+    public static boolean increasingTripletOld(int[] nums) {
         if (nums.length < 3) return false;
         int s1 = Integer.MAX_VALUE;
         int s2 = Integer.MAX_VALUE;

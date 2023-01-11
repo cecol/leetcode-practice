@@ -40,10 +40,13 @@ public class LC856ScoreOfParentheses extends BasicTemplate {
      * 第二個 ')' pop 會拿到 0, 這個 0 是上第一個 '(' 放入的, 結算 score = 4 (來自上一個 score 延續算下來)
      *
      * 所以每次 ')' 他會拿出 對應的 '(' 所存 score
-     * 並看是否有延續之前 score*2, 有可能之前 score 是 0, 那 ')' 至少拿到 1
+     * 並看是否有延續之前 score*2, 有可能之前 score 是 0, 那 ')' 至少拿到 1 -> 因為整串保證是合法的 Parentheses
      * 所以是 Math.max(score*2, 1)
      * 絕對不會是 score = 2*sk.pop() 因為對應 '(' 是更之前的事了, 無法 x2
      * 一定只有自己累積 score 才可以 x2
+     *
+     * score = sk.pop() + Math.max(2 * score, 1);
+     * -> + Math.max(2 * score, 1); 是當前還在累加的 score x2, 不會是 sk.pop() x 2, sk.pop() 要 x2 得等下次
      */
     public int scoreOfParentheses(String S) {
         Stack<Integer> sk = new Stack<>();

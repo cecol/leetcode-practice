@@ -39,7 +39,7 @@ public class LC862ShortestSubarrayWithSumAtLeastK extends BasicTemplate {
      * 是因為 if b[i] <= b[q.last], 我們也知道 i > q.last,
      * 因此如果未來有個達成 b[i-future] - b[q.last] >= k
      * 那麼 b[i-future] - b[i] 更一定可以滿足 >= k 且因為 i > q.last 又使得這個 subarray sum >= K, shorter
-     * 關鍵在於我們一開始就是勇prefix sum 來尋找 subarray 區間
+     * 關鍵在於我們一開始就是用 prefix sum 來尋找 subarray 區間
      *
      * Q: Why keep the deque increase?
      * A: If B[i] <= B[d.back()] and moreover we already know that i > d.back(), it means that compared with d.back(),

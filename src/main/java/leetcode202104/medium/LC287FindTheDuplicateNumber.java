@@ -25,6 +25,11 @@ public class LC287FindTheDuplicateNumber extends BasicTemplate {
      * 2022/11/2 這題就是要考 Floyd circle detection algorithm, 原本題意沒有給限制, 後來加上限制就是為了提示你要考這個
      * 所以唯一正宗解法只有
      * fast/slow 解法 https://leetcode.com/problems/find-the-duplicate-number/discuss/72846/My-easy-understood-solution-with-O(n)-time-and-O(1)-space-without-modifying-the-array.-With-clear-explanation.
+     * nums = [2,1,3], then the mapping function is 0->2, 1->1, 2->3.
+     * if duplicate
+     * nums = [2,1,3,1], then the mapping function is 0->2, {1,3}->1, 2->3.
+     * Then the sequence we get definitely has a cycle. 0->2->3->1->1->1->1->1->......
+     * The starting point of this cycle is the duplicate number : 3
      * */
     public int findDuplicate(int[] nums) {
         int n = nums.length;

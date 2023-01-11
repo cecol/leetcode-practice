@@ -34,7 +34,7 @@ public class LC1292MaximumSideLengthOfASquareWithSumLessThanOrEqualToThreshold e
                 sum[i][j] = mat[i - 1][j - 1] + sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1];
         int l = 0, r = Math.min(m, n);
         while (l < r) {
-            int mid = l + (r - l) / 2;
+            int mid = l + (r - l + 1) / 2;
             if (isOK(mat, sum, mid, threshold)) {
                 l = mid;
             }
