@@ -19,6 +19,11 @@ public class LC395LongestSubstringWithAtLeastKRepeatingCharacters extends BasicT
      * 如果有字元計數 < k -> 任何 substring 都不該包含該字元
      * 所以用這些不合法字元當作邊界下去切,
      * i, j two pointer 下去切出 substring -> substring 遞迴找 longestSubstring
+     *
+     * 這題有個很強烈分界點:
+     * - if (cc[s.charAt(j) - 'a'] < k && cc[s.charAt(j) - 'a'] > 0) 當 j 踩到一定不可能合法的 char, (整串總數 < k)
+     * - 代表 得以這個 charAt(j) 為切點, 左右 substring 找 longestSubstring(sub, k),
+     * - 因為 包含當前 charAt(j) 已肯定不合法！！, 所以是剩下的 substring 去 divide-conquer
      */
     public int longestSubstring(String s, int k) {
         int[] cc = new int[26];

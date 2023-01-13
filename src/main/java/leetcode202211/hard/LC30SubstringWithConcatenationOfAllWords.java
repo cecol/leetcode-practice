@@ -6,10 +6,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
-public class LC3030SubstringWithConcatenationOfAllWords extends BasicTemplate {
+public class LC30SubstringWithConcatenationOfAllWords extends BasicTemplate {
     public static void main(String[] args) {
         Logger log = LoggerFactory.getLogger("Main");
-        var LC = new LC3030SubstringWithConcatenationOfAllWords();
+        var LC = new LC30SubstringWithConcatenationOfAllWords();
     }
 
     /**

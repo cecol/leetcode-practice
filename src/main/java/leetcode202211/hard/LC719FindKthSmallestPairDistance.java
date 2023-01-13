@@ -47,9 +47,8 @@ public class LC719FindKthSmallestPairDistance extends BasicTemplate {
         int l = nums[1] - nums[0];
         for (int i = 0; i < n - 1; i++) l = Math.min(l, nums[i + 1] - nums[i]);
         int r = nums[n - 1] - nums[0];
-        int mid;
         while (l < r) {
-            mid = l + (r - l) / 2;
+            int mid = l + (r - l) / 2;
             int c = 0;
             int i = 0, j = 1;
             for (; i < n; i++) {

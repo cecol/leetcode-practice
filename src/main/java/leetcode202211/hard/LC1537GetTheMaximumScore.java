@@ -29,6 +29,9 @@ public class LC1537GetTheMaximumScore extends BasicTemplate {
      * 以及當到達傳送門 直接
      * s1 = Math.max(s1, s2) + nums1[i1];
      * s2 = s1;
+     * - 為什麼 s1 = Math.max(s1, s2) + nums1[i1]; 是加上 nums1[i1]?
+     * - 然後給 s2 = s1;?
+     * - 因為這時候 nums1[i1] == nums2[i2], 所以 Math.max(s1, s2) + nums2[i2]; 也是可以的, 取一就好, 繼續往前走
      *
      * 小的就放棄, 取max繼續往前累加 s1, s2
      * 直到最後回傳 做總結
