@@ -32,7 +32,7 @@ public class LC274H_Index extends BasicTemplate {
      * largest 1 = [1,1,5,6,"6"] => 1[6] element not smaller than 1 => success, but maybe not enough
      * largest 2 = [1,1,5,"6",6] => 2[6,6] element not smaller than 2 => success, but maybe not enough
      * largest 3 = [1,1,"5",6,6] => 3[5,6,6] element not smaller than 3 => success, but maybe not enough
-     * largest 4 = [1,"1",5,6,6] => 3[5,6,6] element not smaller than 4 => fail
+     * largest 4 = [1,"1",5,6,6] => 4[1,5,6,6] element not smaller than 4 => fail
      *
      * k 是找至少 k 個元素 >= k,
      * k = 1, 有6個, 所以合法  但還不是 largest

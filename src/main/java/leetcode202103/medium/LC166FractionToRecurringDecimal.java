@@ -23,7 +23,7 @@ public class LC166FractionToRecurringDecimal extends BasicTemplate {
      * 1. 負數處理
      * -> 先判定結果是否為正數or負數, 在string 先補上 - 負號
      * -> 把 numerator & denominator 轉 Math.abs -> 然後還要轉 long
-     * -> 因為後面都要 *= 10 避免 int overfloat
+     * -> 因為後面都要 *= 10 避免 int overflow
      * -> 因為如果給的是Integer.MIN_VALUE -> Math.abs 會有問題
      * 2. Map是 key = 餘數, value = 第一次遇到該餘數的 string length, 之後再遇到用這index 來 insert (, )
      * 3. 步驟

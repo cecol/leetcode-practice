@@ -38,6 +38,18 @@ public class LC446ArithmeticSlicesIISubsequence extends BasicTemplate {
      * 比如当i=3指向数字8时，j=2指向数字6，那么二者差值为2，此时先在dp[3]建立 2->1 的映射，
      * 由于dp[j=2]中有 2->2 的映射，那么加上数字8
      * 其实新增了两个等差数列 [2,4,6,8] 和 [4,6,8]
+     *
+     * 另外有個更關鍵的理由是因為 called arithmetic if it consists of at least three elements
+     * 要有三個 元素才會成為 arithmetic sequence,
+     * 所以當前 dp[i] 有的 diff , dp[j] 也有, 代表 已滿足至少 at least three elements
+     * 比如說 [2,6,10] diff 4 組成的 arithmetic sequence 是只有走到 10 才會 計算到有 2,6,10
+     * 走到 6 時候, 2 根本沒還有 diff 4 紀錄
+     * 走到 10 時候, 是拿 6 的 diff 4 -> 1 紀錄 剛好是一個 -> [2,6,10] -> at least three elements
+     * 而非是 10 的 diff 4 -> 2, 10 的 diff 4 是給如果後面還有 14 時候會 加總 diff 4 -> 2
+     * 這時候紀錄的 arithmetic sequence 有
+     * 1. 2,6,10,14
+     * 2. 6,10,14
+     * 3. 2,6,10 在 10 已計入
      */
     public int numberOfArithmeticSlices(int[] nums) {
         int n = nums.length, res = 0;

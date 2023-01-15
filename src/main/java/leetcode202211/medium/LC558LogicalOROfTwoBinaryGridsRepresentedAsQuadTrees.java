@@ -39,6 +39,10 @@ public class LC558LogicalOROfTwoBinaryGridsRepresentedAsQuadTrees extends BasicT
      * 2. 任一者是 isLeaf 就可以直接決定後續結果
      * 3. 若都不是 isLeaf, 就得先遞迴下去
      * 4. 遞迴玩得檢查是否 4個兒子都是 isLeaf 且值都一樣, 是的話得 reset parent & child
+     * - 因為 q1.topLeft = intersect(q1.topLeft, q2.topLeft);
+     * - 可能本來 q1 is leaf, topLeft = null
+     * - 但我們直接覆蓋 q1.topLeft = intersect(q1.topLeft, q2.topLeft), 讓他變成 parent,
+     * - 所以最後還要回頭檢查是否還是 4 個遞迴的 childs 還是保持 leaf
      * 5. intersect 不用建新 Node, 只要拿 q1 當merge 結果就好
      */
     public Node intersect(Node q1, Node q2) {

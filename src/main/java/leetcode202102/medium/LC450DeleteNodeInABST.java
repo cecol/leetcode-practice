@@ -27,7 +27,7 @@ public class LC450DeleteNodeInABST extends BasicTemplate {
    * -> 2. 找右子樹的最左(最小點-leaf)來當銜接點, 左子樹接在左邊(因為左子樹皆小於它) -> 回傳root.right(因為左邊已經被揭過去了)
    * -> 這邊概念也可以反過來 用左子樹來當最後結果 那就要找左子樹的最大值來接右子樹
    *
-   * 我想厝的點是一直想說要紀錄找到那一個要被刪除的點 然後還要紀錄parent
+   * 我想錯的點是一直想說要紀錄找到那一個要被刪除的點 然後還要紀錄parent
    * 導致整個程式碼很混亂, 沒想到善用 deleteNode 的遞迴形式
    * 用 deleteNode 的回傳來作為 subtree 下去繼續找的語意
    */

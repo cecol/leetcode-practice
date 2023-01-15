@@ -18,6 +18,11 @@ public class LC1590MakeSumDivisibleByP extends BasicTemplate {
      * https://leetcode.com/problems/make-sum-divisible-by-p/discuss/854197/JavaC%2B%2BPython-Prefix-Sum
      * 我知道要用餘數來找, 但太多細節沒處理好
      *
+     * 1. 先知道目前整個 sum % p = need
+     * 2. 所以要找最小的 subarray sum % p == need
+     * 3. 記載當前 累計 remainder 的 cur
+     * 4. 因為要找的是 cur - want = need, 因為要反過來找 want, 所以 want = cur - need, 不會是 want = need - cur
+     *
      * 1. 加總的 sum 會液出 int, 所以其實加總過程都要 %p,
      * 因為我們要知道沒有整除 p 的 [模數] 是多少, 才可以去找 preSum 的差是該 [模數]
      * 2. 算 preSum過程也要 %p, 避免太大

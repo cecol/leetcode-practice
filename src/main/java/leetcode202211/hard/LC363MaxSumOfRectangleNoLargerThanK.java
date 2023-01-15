@@ -27,6 +27,7 @@ public class LC363MaxSumOfRectangleNoLargerThanK extends BasicTemplate {
      * 所以是 curSum - k <= preSum
      * TreeSet.ceiling(curSum - k) 去找, 不是取 floor
      * 取 floor 會太接近 curSum
+     * 取 ceiling 是讓 preSum 大一點可以確保 curSum - k <= preSum
      * 是要剛好距離 curSum 遠到剛好是 k, 所以減完要 ceiling, 如果取 floor 可能會 > k
      */
     public int maxSumSubmatrix(int[][] matrix, int k) {
@@ -47,11 +48,11 @@ public class LC363MaxSumOfRectangleNoLargerThanK extends BasicTemplate {
         TreeSet<Integer> ts = new TreeSet<>();
         ts.add(0);
         int res = Integer.MIN_VALUE;
-        for (int i = 0, right = 0; i < n; i++) {
-            right += arr[i];
-            Integer left = ts.ceiling(right - k);
-            if (left != null) res = Math.max(res, right - left);
-            ts.add(right);
+        for (int i = 0, curSum = 0; i < n; i++) {
+            curSum += arr[i];
+            Integer preSum = ts.ceiling(curSum - k);
+            if (preSum != null) res = Math.max(res, curSum - preSum);
+            ts.add(curSum);
         }
         return res;
     }
