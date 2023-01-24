@@ -2,10 +2,13 @@ package leetcode202012.easy;
 
 import leetcode20200921to20201031.BasicTemplate;
 
+import java.util.List;
+
 public class LC121BestTimeToBuyAndSellStock extends BasicTemplate {
     public static void main(String[] args) {
         var LC = new LC121BestTimeToBuyAndSellStock();
         var s = LC.maxProfit(new int[]{7, 1, 5, 3, 6, 4});
+        List.of(1);
     }
 
     /**

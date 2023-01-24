@@ -30,8 +30,8 @@ public class LC962MaximumWidthRamp extends BasicTemplate {
      * 2. nums[i] 從尾巴開始往 stack 看, 找到第一個 nums[i] >= stack.top
      * 這時候更新 res,
      * 前面小的 pop 掉沒關係, 因為是尾巴開始找 被 pop 給 nums[i-1] 也不會造成更長結果了
-     * Ex nums[i-1] < nums[i] 那 nums[i-1] 更不可能找到 stack 更深處,  前面 pop 掉的葉不可能創造更大 ramp
-     * Ex nums[i-1] > nums[i] 那 nums[i-1] 可以找到 stack 更深處, 前面 pop 掉的本來也毫無營響
+     * Ex nums[i-1] < nums[i] 那 nums[i-1] 更不可能找到 stack 更深處,  前面 pop 掉的也不可能創造更大 ramp
+     * Ex nums[i-1] > nums[i] 那 nums[i-1] 可以找到 stack 更深處, 前面 pop 掉的本來也毫無影響
      */
     public int maxWidthRampFast(int[] nums) {
         Stack<Integer> sk = new Stack<>();
@@ -40,7 +40,7 @@ public class LC962MaximumWidthRamp extends BasicTemplate {
             if (sk.size() == 0 || nums[sk.peek()] > nums[i]) sk.push(i);
         }
         for (int i = n - 1; i > 0; i--) {
-            while (sk.size() > 0 && nums[i] >= nums[sk.peek()]) res = Math.max(res, i - sk.pop() + 1);
+            while (sk.size() > 0 && nums[i] >= nums[sk.peek()]) res = Math.max(res, i - sk.pop() );
         }
         return res;
     }

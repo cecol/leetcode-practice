@@ -27,7 +27,7 @@ public class LC1102PathWithMaximumMinimumValue extends BasicTemplate {
      * - if (possible(grid, mid)) l = mid;
      * - else r = mid - 1;
      *
-     * 但這邊有個替別地方是
+     * 但這邊有個特別地方是
      * 得用 int mid = r - (r - l) / 2; or int mid = l + (r - l) / 2 + 1;
      * 如果用 int mid = l + (r - l) / 2; 會 TLE
      * https://leetcode.com/problems/path-with-maximum-minimum-value/solution/1328396

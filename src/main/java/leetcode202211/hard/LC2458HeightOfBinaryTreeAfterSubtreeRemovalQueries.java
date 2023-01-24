@@ -8,7 +8,8 @@ import util.TreeNode;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class LC2458HeightOfBinaryTreeAfterSubtreeRemovalQueries extends BasicTemplate {
+public class
+LC2458HeightOfBinaryTreeAfterSubtreeRemovalQueries extends BasicTemplate {
     public static void main(String[] args) {
         Logger log = LoggerFactory.getLogger("Main");
         var LC = new LC2458HeightOfBinaryTreeAfterSubtreeRemovalQueries();

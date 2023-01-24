@@ -42,7 +42,6 @@ public class LC772BasicCalculatorIII extends BasicTemplate {
         if (s == null || s.length() == 0) return 0;
         Queue<Character> q = new LinkedList<>();
         for (char c : s.toCharArray()) q.offer(c);
-        q.offer('+');
         return helper(q);
     }
 

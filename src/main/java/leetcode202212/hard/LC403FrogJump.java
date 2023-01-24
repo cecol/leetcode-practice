@@ -42,7 +42,7 @@ public class LC403FrogJump extends BasicTemplate {
     boolean dfs(int curStone, int jump, TreeSet<Integer> ts, Map<String, Boolean> can, int t) {
         String k = curStone + "x" + jump;
         if (can.containsKey(k)) return can.get(k);
-        if (curStone <= 0 || !ts.contains(curStone)) return false;
+        if (jump <= 0 || !ts.contains(curStone)) return false;
         if (curStone == t) {
             can.put(k, true);
             return true;

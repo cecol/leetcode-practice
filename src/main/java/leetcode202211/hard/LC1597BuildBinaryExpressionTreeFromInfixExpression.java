@@ -57,12 +57,12 @@ public class LC1597BuildBinaryExpressionTreeFromInfixExpression extends BasicTem
         Deque<Node> operands = new LinkedList<>();
         Deque<Node> operators = new LinkedList<>();
         while (dq.size() > 0) {
-            char c = dq.pollFirst();
+            char c = dq.poll();
             if (Character.isDigit(c)) operands.offerLast(new Node(c));
             else if (c == '(') operands.offerLast(helper(dq));
             else if (c == ')') {
                 eliminate(operands, operators);
-                return operands.pollLast();
+                return operands.poll();
             } else {
                 if (operators.size() > 0 &&
                         !((operators.peekLast().val == '+' || operators.peekLast().val == '-') &&
@@ -72,7 +72,7 @@ public class LC1597BuildBinaryExpressionTreeFromInfixExpression extends BasicTem
             }
         }
         eliminate(operands, operators);
-        return operands.pollLast();
+        return operands.poll();
     }
 
     void eliminate(Deque<Node> operands, Deque<Node> operators) {

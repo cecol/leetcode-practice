@@ -46,13 +46,24 @@ public class LC302SmallestRectangleEnclosingBlackPixels extends BasicTemplate {
      * 其他 right, top and bottom 也是如此
      * <p>
      * 整體時間複雜度是 M * O(LogN) + N * O(LogM)
+     *
+     * 2023/1/21
+     * 一直找不懂為什麼 找 left 是 0 to y ? y 看起來是高度！！, 應該是 0 to x 才對
+     * https://leetcode.com/problems/smallest-rectangle-enclosing-black-pixels/solutions/127776/official-solution/comments/911159
+     * 這邊有解釋
+     * x for row/y for col, 不是 Cartesian coordinates
+     * x is the row-index, y is the col-index; it is not like in the Cartesian coordinates that we learnt.
+     * 所以是要找 most left col = 1, 所以是 0 to y !!!
+     * 所以是要找 most top row = 1, 所以是 0 to x !!!
+     * 其實可以 x/y 想成 i/j 可能就不會想歪
+     *
      */
     public int minArea(char[][] image, int x, int y) {
         int m = image.length, n = image[0].length;
         int left = fc(image, 0, y, 0, m, true);
         int right = fc(image, y+1, n, 0, m, false);
-        int top = fr(image, 0, x, left, right, true);
-        int down = fr(image, x+1, m, left, right, false);
+        int top = fr(image, 0, x, 0, n, true);
+        int down = fr(image, x+1, m, 0, n, false);
         return (right - left) * (down - top);
     }
 

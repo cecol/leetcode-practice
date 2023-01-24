@@ -26,7 +26,7 @@ public class LC1932MergeBSTsToCreateSingleBST extends BasicTemplate {
      * 1. 有重複的點, 一定組不出來,
      * 2. 能組合的 root 一定是別人的 leaves, 最終組出來只有一個 root, 所以只有一個 root 不是任何其他 樹 的 leave
      * 3. 承上 如果有兩個 root, 不再其他人的 leaves, 那就無法組成最後單一 BST
-     * 4. 把找到的唯一最終 root 下去組合, 如果最後有組完, 上下屆檢查都對 就是 true
+     * 4. 把找到的唯一最終 root 下去組合, 如果最後有組完, 上下界檢查都對 就是 true
      *
      * Set<Integer> leaves = new TreeSet<>();
      * 只是用來找出最終 root, 從他開始
