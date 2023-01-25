@@ -36,7 +36,7 @@ public class LC126WordLadderII extends BasicTemplate {
         Set<String> wl = new HashSet<>(wordList);
         if (!wl.contains(endWord)) return res;
         bfs(beginWord, endWord, wl);
-        dfs(beginWord, endWord, new ArrayList<>());
+        dfs(endWord, beginWord, new ArrayList<>());
         return res;
     }
 
@@ -76,7 +76,7 @@ public class LC126WordLadderII extends BasicTemplate {
                     if (ca[i] == c) continue;
                     ca[i] = c;
                     String newWord = new String(ca);
-                    if (set.contains(newWord) || newWord.equals(endWord)) {
+                    if (set.contains(newWord)) {
                         if (!path.containsKey(newWord)) {
                             path.put(newWord, path.get(current) + 1);
                             bfs.offer(newWord);

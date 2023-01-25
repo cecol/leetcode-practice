@@ -66,16 +66,12 @@ public class LC743NetworkDelayTime extends BasicTemplate {
      */
     public int networkDelayTime(int[][] times, int N, int K) {
         int[] dist = new int[N + 1];
+        Arrays.fill(dist, Integer.MAX_VALUE);
         Map<Integer, Integer>[] outEdgeCosts = new HashMap[N + 1];
-        for (int i = 1; i <= N; i++) {
-            outEdgeCosts[i] = new HashMap<>();
-            dist[i] = Integer.MAX_VALUE;
-        }
+        for (int i = 1; i <= N; i++) outEdgeCosts[i] = new HashMap<>();
         for (int[] c : times) {
             Integer cost = outEdgeCosts[c[0]].get(c[1]);
-            if (cost == null || cost > c[2]) {
-                outEdgeCosts[c[0]].put(c[1], c[2]);
-            }
+            if (cost == null || cost > c[2]) outEdgeCosts[c[0]].put(c[1], c[2]);
         }
         dist[K] = 0;
         PriorityQueue<int[]> minCost = new PriorityQueue<>(Comparator.comparingInt(i -> i[1]));
@@ -85,7 +81,6 @@ public class LC743NetworkDelayTime extends BasicTemplate {
             int[] minCostNode = minCost.poll();
             int minN = minCostNode[0];
             int minC = minCostNode[1];
-            if (dist[minN] < minC) continue;
             for (Map.Entry<Integer, Integer> adjN : outEdgeCosts[minN].entrySet()) {
                 Integer adjV = adjN.getKey();
                 Integer adjC = adjN.getValue();
