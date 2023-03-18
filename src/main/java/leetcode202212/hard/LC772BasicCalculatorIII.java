@@ -4,14 +4,14 @@ import leetcode20200921to20201031.BasicTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class LC772BasicCalculatorIII extends BasicTemplate {
     public static void main(String[] args) {
         Logger log = LoggerFactory.getLogger("Main");
         var LC = new LC772BasicCalculatorIII();
+        int v = LC.calculateQueue("(5 + (-3)) * (-10)");
+        System.out.println(v + "");
     }
 
     /**
