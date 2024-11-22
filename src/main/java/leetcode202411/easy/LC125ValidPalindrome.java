@@ -11,14 +11,9 @@ public class LC125ValidPalindrome extends BasicTemplate {
 
     public boolean isPalindrome(String s) {
         if (s == null || s.isEmpty()) return true;
+        s = s.replaceAll("[^0-9a-zA-Z]", "").toLowerCase();
         int i = 0, j = s.length() - 1;
-        while (i <= j) {
-            while (i < s.length() && !Character.isAlphabetic(s.charAt(i))) i++;
-            while (j >= 0 && Character.isAlphabetic(s.charAt(j))) j--;
-            if(i <= j && Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) return false;
-            i++;
-            j--;
-        }
+        while (i < j) if (s.charAt(i++) != s.charAt(j--)) return false;
         return true;
     }
 }
