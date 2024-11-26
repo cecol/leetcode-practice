@@ -29,7 +29,7 @@ public class LC662MaximumWidthOfBinaryTree extends BasicTemplate {
    *
    * 遞迴中: if (leftestNodeInEveryLevel.size() == level) leftestNodeInEveryLevel.add(index);
    * 就是說 leftestNodeInEveryLevel.size() == level 這邊是判斷 是否當前的level尚未找到最左的node index
-   * 如果是 -> 把當前的idnex加入 -> 為什麼可以確保當前走道的index一定是最左那一個？
+   * 如果是 -> 把當前的index加入 -> 為什麼可以確保當前走道的index一定是最左那一個？
    * 因為遞迴是左優先 -> 那麼一定是最左的先走到, 如果沒有, 才是後面右兒子才會走到
    * 所以左優先遞迴確保 遇到leftestNodeInEveryLevel.size() == level這個判斷的node一定是該層做左的node先遇到
    *

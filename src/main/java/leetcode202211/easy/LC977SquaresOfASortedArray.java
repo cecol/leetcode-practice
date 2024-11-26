@@ -15,7 +15,7 @@ public class LC977SquaresOfASortedArray extends BasicTemplate {
     /**
      * 無腦 O(NlogN) 是很好解
      * 或者 counting sort, 但耗廢 space O(N)
-     * 沒想到 O(N) 鄭姐這麼單純,
+     * 沒想到 O(N) 正解這麼單純,
      * https://leetcode.com/problems/squares-of-a-sorted-array/discuss/221922/Java-two-pointers-O(N)
      * two pointers, 從尾巴開始放, 因為尾巴是最大的,
      * 要嘛最右邊因為是負數最小(但因為平方後便最大)開使放, 或者最左邊正數開始放
