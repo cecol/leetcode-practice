@@ -40,7 +40,7 @@ public class LC632SmallestRangeCoveringElementsFromKLists extends BasicTemplate 
      * */
     public int[] smallestRange(List<List<Integer>> nums) {
         PriorityQueue<int[]> pq = new PriorityQueue<>((x, y) -> x[0] - y[0]);
-        int max = 0;
+        int max = Integer.MAX_VALUE;
         for (int i = 0; i < nums.size(); i++) {
             pq.offer(new int[]{nums.get(i).get(0), i, 0});
             max = Math.max(max, nums.get(i).get(0));

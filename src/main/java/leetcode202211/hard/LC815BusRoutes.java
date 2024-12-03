@@ -43,7 +43,7 @@ public class LC815BusRoutes extends BasicTemplate {
             int[] p = bfs.poll();
             int stop = p[0], steps = p[1];
             if (stop == target) return steps;
-            for (int bus : stop2Bus.get(stop)) {
+            for (int bus : stop2Bus.getOrDefault(stop, new HashSet<>())) {
                 if (seenBus[bus]) continue;
                 for (int nextStop : routes[bus]) {
                     if (seenStop.contains(nextStop)) continue;
